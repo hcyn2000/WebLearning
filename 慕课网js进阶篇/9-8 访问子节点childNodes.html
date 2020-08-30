@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        javascript
+        <p>javascript</p>
+        <div>jQuery</div>
+        <h5>PHP</h5>
+    </div>
+    <script type="text/javascript">
+        let x = document.querySelector('div').childNodes
+
+        console.log(x.length);
+        for (let i = 0; i < x.length; i++) {
+            console.log(x[i].nodeType);
+        }
+
+    </script>
+</body>
+
+</html>

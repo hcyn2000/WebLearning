@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+
+        function openWindow() {
+
+            var mymassage = confirm("是否打开一个新网站？");//confirm(文本)
+
+            if (mymassage == true) {
+
+                webchar = prompt("请输入网址：(提示：以www开头！！！)", "");//prompt(文本,设置默认文本)
+                //打开输入的网址
+                if (webchar != null && webchar != '') {
+
+                    webchar = 'http://' + webchar;
+
+                    window.open(webchar, 'idth = 400,height = 500,menubar = no,toolbar = no');
+                }
+                //没有输入点确认时打开默认窗口
+                else if (webchar == '') window.open('http://www.imooc.com', 'idth = 400,height = 500,menubar = no,toolbar = no');
+
+                //点击取消不执行
+
+                else return null;
+            }
+            else return null;
+        }
+    </script>
+</head>
+
+<body>
+    <input type="button" value="新窗口打开网站" onclick="openWindow()" />
+</body>
+
+</html>

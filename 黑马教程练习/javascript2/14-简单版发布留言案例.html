@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <textarea name="" id=""></textarea>
+    <button>发布</button>
+    <ul>
+
+    </ul>
+    <script>
+        //获取 按钮标签、文本标签、ul标签
+        let btn = document.querySelector('button')
+        let text = document.querySelector('textarea')
+        let ul = document.querySelector('ul')
+
+        btn.onclick = function () { //给btn添加点击事件
+            if (text.value == "") { //判断文本框里是否输入了内容
+                alert('请输入内容')     //没有输入内容则弹出提示框
+                return false    //返回false
+            } else {    //否则
+                let li = document.createElement('li')   //创建一个li
+                ul.insertBefore(li, ul.children[0])     //给ul添加一个子节点li，放到最前面
+                li.innerHTML = text.value       //把文本框里的内容赋值给li
+                text.value = ""         //把文本框清空
+            }
+
+        }
+    </script>
+</body>
+
+</html>

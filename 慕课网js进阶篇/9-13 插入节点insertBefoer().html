@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul id="test">
+        <li>JavaScript</li>
+        <li>HTML</li>
+    </ul>
+
+    <script type="text/javascript">
+
+        var otest = document.getElementById("test");
+
+        var nownode = document.createElement("li")
+        nownode.innerHTML = "php"
+        otest.insertBefore(nownode, otest.children[1])
+
+    </script>
+
+</body>
+
+</html>

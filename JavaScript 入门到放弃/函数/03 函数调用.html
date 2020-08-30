@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数调用</title>
+</head>
+
+<body>
+    <script>
+        // 函数调用的4种方式: 函数调用模式，方法调用模式，构造调用模式，间接调用模式
+
+
+        // 1. 函数调用模式
+        // function add(x, y) {
+        //     // 'use strict'
+        //     // 在严格模式下，当前函数中的this指向了undefined
+        //     console.log(this);  //在非严格模式指的是window对象
+        //     return x + y
+        // }
+        // var sum = add(3, 4)
+        // console.log(sum);   //7
+
+        // 重写
+        // 注意:小心避免全局的属性重写带来的问题
+        // function fn() {
+        //     // 'use strict'
+        //     this.a = 1
+        //     console.log(this);  //在非严格模式指的是window对象
+        // }
+        // fn()
+        // console.log(this);
+        // this.a = 5
+        // console.log(this);
+        // console.log(a);
+
+
+        // 2. 方法调用模式
+        // var obj = {
+        //     a: 1,
+        //     // 这个fn称为obj对象的方法
+        //     fn: function () {
+        //         // console.log(this);  //此时this是obj
+        //         // console.log('被调用了');
+        //         this.fn2();
+        //     },
+        //     fn2: function () {
+        //         this.a = 2;
+        //     }
+        // }
+        // obj.fn()
+        // // obj.fn2()
+        // console.log(obj.a);
+
+
+        // 3.构造函数调用模式
+        // function fn(x, y) {
+        //     this.a = x + y
+        // }
+        // // this指向问题: 当做普通函数调用，this指向了window，当做构造函数调用，this指向当前的函数对象，当做对象的方法调用，这个this一般情况指向了当前的对象
+        // var obj = new fn(2, 3);
+        // console.log(obj);   //fn {a: 5}
+
+        // function fn() {
+        //     console.log(this);  //fn {}
+        //     this.a = 10;
+        //     return 1
+        // }
+        // var a = new fn; //等价于var a = new fn()
+        // console.log(a); //fn {a: 10}
+
+
+        // 4.间接调用模式   call({},1,2,3)    apply({},[1,2,3])
+        var obj = {
+            a: 10
+        };
+        function sum(x, y) {
+            console.log(this);
+            return x + y + this.a
+        }
+        // console.log(sum());
+        console.log(sum.call(obj, 1, 2));
+        console.log(sum.apply(obj, [1, 2]));
+    </script>
+</body>
+
+</html>

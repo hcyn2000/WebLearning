@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数返回值</title>
+</head>
+
+<body>
+    <script>
+        // function fn() {
+
+        // }
+        // console.log(fn());  //如果没有返回值，调用表达式的结果是undefined
+
+
+        //一个函数可以有多个return语句
+        // function compare() {
+        //     if (x > y) {
+        //         return x - y;
+        //     } else {
+        //         return y - x;
+        //     }
+        // }
+
+
+        //如果函数调用时在前面加上new前缀，且返回值不是一个对象或者没有返回值，这返回该对象 (this)
+        // function fn() {
+        //     console.log(this);  //fn{}
+        //     this.a = 2
+        //     return 1;
+        // }
+        // var test = new fn();
+        // console.log(test.a);   //2
+
+
+        // 如果返回值是一个对象，则返回该对象
+        // function fn() {
+        //     this.a = 2
+        //     return { a: 1 };
+        // }
+        // var test = new fn();
+        // console.log(test);   //{a: 1}
+    </script>
+</body>
+
+</html>

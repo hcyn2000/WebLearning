@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // LHS查询  RHS查询
+        var a = add()
+        function add() {
+            return '2';
+        }
+        add()
+        // 把函数add赋值给变量a是LHS查询
+        // add()是RHS查询
+
+        function foo(a) {
+            console.log(a);//2
+        }
+        foo(2);
+        // 这段代码中，总共包括4个查询，分别是：
+        // 1、foo(…)对foo进行了RHS引用
+        // 2、函数传参a = 2对a进行了LHS引用
+        // 3、console.log(…)对console对象进行了RHS引用，并检查其是否有一个log的方法
+        // 4、console.log(a)对a进行了RHS引用，并把得到的值传给了console.log(…)
+    </script>
+</body>
+
+</html>

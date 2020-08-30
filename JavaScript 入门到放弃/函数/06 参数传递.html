@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>参数传递</title>
+</head>
+
+<body>
+    <script>
+        // 1.基本数据类型
+        // 在向参数传递基本数据类型的值时，被传递的值会被复制到一个局部变量
+        // function add(num) {
+        //     num = num + 10
+        //     return num
+        // }
+        // var count = 20
+        // var result = add(count)
+        // console.log(result);    //30
+        // console.log(count);     //20
+
+        // 2. 引用数据类型
+        // 在向参数传递引用数据类型的值时，会把这个值在内存中的地址复制给局部变量
+        // function setName(obj) {
+        //     obj.name = 'hc';
+        // }
+        // var person = new Object()
+        // setName(person);
+        // console.log(person.name);   //hc
+
+        function setName(obj) {
+            obj.name = 'hc'
+            console.log(person.name);   //hc
+            obj = new Object()
+            obj.name = 'test'
+            console.log(person.name);   //hc
+        }
+        var person = new Object()
+        setName(person)
+    </script>
+</body>
+
+</html>

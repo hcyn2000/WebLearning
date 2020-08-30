@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="con">
+        <p>javascript</p>
+        <div>jQuery</div>
+        <h5>PHP</h5>
+    </div>
+    <script type="text/javascript">
+        var x = document.getElementById("con");
+        // console.log(x.firstChild);
+        // nodeName  获得元素的节点名称
+        document.write(x.firstElementChild.nodeName + "<br>");
+        document.write(x.lastElementChild.nodeName);
+    </script>
+</body>
+
+</html>

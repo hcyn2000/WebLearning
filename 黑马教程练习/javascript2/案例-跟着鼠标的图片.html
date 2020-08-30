@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=578252772,704782509&fm=11&gp=0.jpg" alt="">
+
+    <script>
+        let pic = document.querySelector('img')
+        document.addEventListener('mousemove', function (e) {
+            let x = e.pageX
+            let y = e.pageY
+            let w = pic.naturalWidth * 0.5
+            let h = pic.naturalHeight * 0.5
+            pic.style.left = x - w + 'px'
+            pic.style.top = y - h + 'px'
+        })
+    </script>
+</body>
+
+</html>

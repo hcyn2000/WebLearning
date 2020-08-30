@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>confirm("")</title>
+    <script type="text/javascript">
+        function rec() {
+            var mymessage = confirm("你是大佬吗？")
+            if (mymessage == true) {
+                document.write("大佬好！");
+            } else {
+                document.write("抱歉，你哪位?");
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <input type="button" value="点我" onclick="rec()" type="button">
+</body>
+
+</html>

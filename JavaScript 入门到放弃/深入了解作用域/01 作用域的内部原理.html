@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 作用域分为全局作用域和函数作用域
+        // 函数作用域可以调用全局作用域定义的变量，而全局作用域却不能调用函数作用域里定义的变量
+        var a = 2
+        console.log(a);
+        function add() {
+            var b = 3
+            console.log(a);
+        }
+        add()
+        // console.log(b);
+
+        // js是脚本语言，所以没有编译阶段，它会边解释边执行
+
+        //内部原理分成五个部分  编译，执行，查询，嵌套，异常    (了解)
+    </script>
+</body>
+
+</html>

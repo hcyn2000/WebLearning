@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 简而言之，编译过程就是编译器把程序分解成词法单元(token)，然后把词法单元解析成语法树(AST)，再把语法树变成机器指令等待执行的过程。
+
+        var a = 2
+        console.log(a);
+        console.log(b);
+        // console.log(a);会打印出2     console.log(b);会报错
+        // 执行阶段:
+        // 1.引擎运行时会首先查找当前的作用域，看当前的作用域集合中是否存在一个叫作a的变量。如果是，引擎就会使用这个变量；如果否，引擎会继续查找该变量。
+        // 2.如果引擎最终找到了变量a，就会将2赋值给a这个变量。否则引擎会抛出一个异常
+    </script>
+</body>
+
+</html>

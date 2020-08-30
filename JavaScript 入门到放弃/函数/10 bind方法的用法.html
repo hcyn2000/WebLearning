@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // bind es5新增的方法，主要作用：将函数绑定到某个对象中，并且有返回值(一个函数)
+        function fn(y) {
+            console.log(this);
+            return this.x + y;
+        }
+        var obj = {
+            x: 1
+        }
+        var gn = fn.bind(obj)
+        console.log(gn);
+        console.log(gn(3));
+
+        // 常见的函数式编程技术  ->  函数柯里化
+        // function getConfig(colors, size, otherOptions) {
+        //     console.log(colors, size, otherOptions);
+        // }
+        // var defaultConfig = getConfig.bind(null, '#ff6700', 123)
+        // defaultConfig('qwe')
+        // defaultConfig('456')
+    </script>
+</body>
+
+</html>

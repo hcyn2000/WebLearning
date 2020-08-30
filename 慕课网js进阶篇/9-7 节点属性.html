@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul>
+        <li class="list">javascript</li>
+        <li>HTML/CSS</li>
+        <li>jQuery</li>
+        <strong>qweasd</strong>
+    </ul>
+    <script type="text/javascript">
+        var lis = document.getElementsByTagName('li')
+        var str = document.getElementsByTagName('strong')
+        var list = document.getElementsByClassName('list')
+        console.log(lis);
+        console.log(str);
+        console.log(list);
+        for (i = 0; i < lis.length; i++) {
+            document.write(lis[i].nodeName + "<br />");
+            document.write(lis[i].nodeValue + "<br />");
+            document.write(lis[i].nodeType + "<br />");
+        }
+        document.write(str[0].nodeValue + "<br />");
+        document.write(list[0].nodeName + "<br />");
+
+    </script>
+</body>
+
+</html>
