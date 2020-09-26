@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01 vue的起步和插值</title>
+</head>
+
+<body>
+    <div id="app">
+        <h2>{{ msg }}</h2>
+        <h3>{{ 2 }}</h3>
+        <h3>{{ "hello" }}</h3>
+        <h3>{{ {id:1} }}</h3>
+        <h3>{{ 1>2 ? '大于' : '不大于' }}</h3>
+        <h3>{{ txt.split('').reverse().join('') }}</h3>
+        <h3>{{ getContent() }}</h3>
+    </div>
+
+    <script src="./vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                msg: 'hello vue',
+                txt: 'hello',
+                msg2: 'content'
+            },
+            methods: {
+                getContent() {
+                    return this.msg2
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>
