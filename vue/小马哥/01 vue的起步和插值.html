@@ -5,6 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>01 vue的起步和插值</title>
+    <style>
+        .red {
+            color: red;
+        }
+
+        .blue {
+            color: blue;
+        }
+    </style>
 </head>
 
 <body>
@@ -16,6 +25,7 @@
         <h3>{{ 1>2 ? '大于' : '不大于' }}</h3>
         <h3>{{ txt.split('').reverse().join('') }}</h3>
         <h3>{{ getContent() }}</h3>
+        <h3 :class="isShow ? 'red':'blue'" @click="show"> {{txt}}</h3>
     </div>
 
     <script src="./vue.js"></script>
@@ -25,11 +35,15 @@
             data: {
                 msg: 'hello vue',
                 txt: 'hello',
-                msg2: 'content'
+                msg2: 'content',
+                isShow: true
             },
             methods: {
                 getContent() {
                     return this.msg2
+                },
+                show() {
+                    this.isShow = !this.isShow
                 }
             },
         })
