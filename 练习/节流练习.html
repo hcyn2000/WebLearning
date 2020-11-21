@@ -1,0 +1,19 @@
+<div class="jl">节流</div>
+<script>
+  function jieLiu(fn) {
+    let timeout = null
+    return function () {
+      if (!timeout) {
+        timeout = setTimeout(() => {
+          fn()
+          timeout = null
+        }, 2000);
+      }
+    }
+  }
+  function a() {
+    console.log('节流成功');
+  }
+  let JL = document.querySelector('.jl')
+  JL.addEventListener('click', jieLiu(a))
+</script>

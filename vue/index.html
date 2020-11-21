@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body>
+    <div id="app">
+        <h2>基本用法</h2>
+        <p>{{msg|urlmsg}}</p>
+        <p :title="msg|urlmsg">{{msg|urlmsg}}</p>
+        <p>{{dmsg|zhua}}</p>
+        <h2>2、【使用value代替前面的data数据】</h2>
+        <p>{{datam|datamsg}}</p>
+        <p>{{datah|datamsg}}</p>
+        <h2>3、【回调函数多变量的情况】</h2>
+        <p>{{msg|moremsg(msg,"haha","hehe")}}</p>
+        <p>{{msg|moremsg("haha","hehe")}}</p>
+        <h2>4、【多过滤器的使用】</h2>
+        <p>{{dmsg2|zhua|zhua2}}</p>
+        <p>{{dmsg2|zhua2|zhua}}</p>
+        <h2>5、【回调函数多变量的情况】</h2>
+        <p v-for="obj in list">{{obj.id|addnum(obj.institute)}}</p>
+        <p v-for="obj in newlist">{{obj.news|toslice}}</p>
+    </div>
+    <script src="vue-2.4.0.js"></script>
+    <script>
+        /*
+        filter 过滤器的使用
+        filter在2.0以后就没有内置过滤器(filter)
+        一、基本用法
+        第一步 Vue.filter("过滤器的名称",回调函数)
+        第二步{{要过滤的内容|过滤器的名称}}
+        :title="要过滤的内容|过滤器的名称"1
+        案例1为添加的效果、案例2为置换后的效果
+        2、【使用value代替前面的data数据】
+        3、【回调函数多变量的情况】
+        易错点：
+        1）在过滤器当中function(参数1，参数2，参数3)，其中参数1为|前面的字符
+        2）在调用时，不用放入参数1，直接{{data|filtermethor(参数2，参数3)}},不用些参数1
+        4、多过滤器的使用
+        多过滤器是有顺序的，先运行离数据近的，再运行离数据远的
+        注意：第二个过滤器是在第一个过滤器的基础上渲染的，而不是根据原数据来渲染的
+        5、【过滤器与数组对象】
+        */
+        var date = new Date()
+        var m = date.getMinutes()
+        var h = date.getHours()
+        Vue.filter("urlmsg", function (msg) {
+            return msg + "www.jxgmxy.com"
+        })
+        Vue.filter("zhua", function (haha) {
+            return haha.replace(/傻逼/g, "**")
+        })
+        //2
+        Vue.filter('datamsg', function (value) {
+            // if(value<10){
+            // 	return "0"+value
+            // }else{
+            // 	return value
+            // }
+            return value < 10 ? "0" + value : value
+        })
+        //3
+        Vue.filter('moremsg', function (newmsg, haha, hehe) {
+            return newmsg + haha + hehe
+        })
+        //4、【多过滤器的使用】
+        Vue.filter("zhua2", function (haha) {
+            return haha.replace(/你妈/g, "**")
+        })
+
+        //5、【过滤器与数组对象】
+        //例题：生动生成学号
+        Vue.filter('addnum', function (value, inst) {
+            if (inst == "信息系") {
+                return "T2020" + "01" + value
+            } else if (inst == "提瓦特大陆") {
+                return "T2020" + "02" + value
+            } else {
+                return "T2020" + "03" + value
+            }
+        })
+        //例题：规定标题字数，超过部分...
+        Vue.filter('toslice', function (value) {
+            var len = value.length
+            if (len <= 18) {
+                return value
+            } else {
+                return value.slice(0, 17) + "..."
+            }
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: "江西工贸的新生到了哦",
+                dmsg: "傻逼东西，玩你妈，不会玩滚回去上班",
+                datam: m,
+                datah: h,
+                dmsg2: '你妈还好吗,傻逼',
+                list: [
+                    { id: 1, name: '黄勇祺', sex: 1, institute: '信息系' },
+                    { id: 2, name: '罗志刚', sex: 0, institute: '信息系' },
+                    { id: 3, name: '芭芭拉', sex: 1, institute: '提瓦特大陆' },
+                    { id: 4, name: '凝光', sex: 0, institute: '提瓦特大陆' }
+                ],
+                newlist: [
+                    { tid: 1, news: "黄勇祺上专业课的时候看小说不敲代码" },
+                    { tid: 2, news: "江西工业贸易职业技术学院的18软件4班罗志刚在上专业课的时候看小说，不敲代码，臭不要脸，哈哈哈" },
+                    { tid: 1, news: "黄勇祺上课看小说" }
+                ]
+            },
+            methods: {}
+        })
+    </script>
+</body>
+
+</html>

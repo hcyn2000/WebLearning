@@ -1,0 +1,17 @@
+<input type="text" name="" id="inp">
+<script>
+  function fangDou(fn) {
+    let timeout = null
+    return function () {
+      clearTimeout(timeout)
+      timeout = setTimeout(() => {
+        fn.apply(this, arguments)
+      }, 500);
+    }
+  }
+  function a() {
+    console.log('防抖成功');
+  }
+  let inp = document.getElementById('inp')
+  inp.addEventListener('input', fangDou(a))
+</script>

@@ -11,6 +11,7 @@
     <div id="app">
         <h3>{{stus[0].name}}</h3>
         <button @click="stus[0].name = 'Tom'">改变</button>
+        <button @click="bat">1</button>
     </div>
 
     <script src="./vue.js"></script>
@@ -18,7 +19,14 @@
         const vm = new Vue({
             el: "#app",
             data: {
-                stus: [{ name: 'jack' }]
+                stus: [{ name: 'jack' }],
+                name: 'Foo'
+            },
+            methods: {
+                bat() {
+                    console.log(1);
+                    this.name = 'Faa'
+                }
             },
             watch: {
                 // 基本的数据类型可以使用watch直接监视，复杂数据类型 Object Array 要深度监视
@@ -26,8 +34,12 @@
                 'stus': {
                     deep: 'true',
                     handler: function (newV, oldv) {
+                        console.log(newV, oldv);
                         console.log(newV[0].name);
                     }
+                },
+                name(newV, oldV) {
+                    console.log(newV, oldV);
                 }
             },
         })

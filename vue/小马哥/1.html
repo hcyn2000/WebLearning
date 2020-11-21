@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app" @click="a">
+    <div @click.stop='b'>123</div>
+  </div>
+
+  <script src="./vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+      },
+      methods: {
+        a() {
+          console.log(1);
+        },
+        b() {
+          console.log(2);
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>
