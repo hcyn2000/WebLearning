@@ -1,0 +1,39 @@
+原地去重
+<script>
+  /**
+ * @param {number[]} nums
+ * @return {number}
+ */
+  var removeDuplicates = function (nums) {
+    if (nums.length == 0) return 0;
+    let a = 0
+    while (a < nums.length) {
+      if (nums[a] === nums[a + 1]) {
+        nums.splice(a + 1, 1)
+      } else {
+        a++
+      }
+    }
+    return a
+  };
+  console.log(removeDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4]));
+</script>
+
+<script>
+  var removeDuplicates = function (nums) {
+    // 慢指针初始为0;
+    let k = 0;
+    // 循环中的变量i是快指针
+    for (let i = 0; i < nums.length; i++) {
+      // 如果 快慢指针指向的元素不同
+      if (nums[i] !== nums[k]) {
+        // 慢指针++; 快指针是 循环变量每次都会自增，不需要单独操作
+        k++;
+        // 将快指针 指向的元素覆盖慢指针当前的元素
+        nums[k] = nums[i]
+      }
+    }
+    return k + 1;
+  };
+  console.log(removeDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4]));
+</script>

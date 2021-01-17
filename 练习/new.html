@@ -1,0 +1,9 @@
+<script>
+  function myNew() {
+    let obj = {}
+    let con = Array.prototype.shift.call(arguments)
+    obj.__proto__ = con.prototype
+    let res = con.apply(obj, arguments)
+    return res instanceof 'object' ? res : obj
+  }
+</script>

@@ -1,0 +1,40 @@
+<script>
+  // let a = {
+  //   valueOf() {
+  //     return 0
+  //   },
+  //   toString() {
+  //     return '1'
+  //   },
+
+  //   // [Symbol.toPrimitive]() {
+  //   //   return 2
+  //   // }
+  // }
+
+  // console.log(1 + a);  // => 1
+
+
+  console.log([1, 2, 3].toString());
+  console.log([1, 2, 3].valueOf());
+  console.log(true + true);
+  console.log(false + false);
+  console.log(true + false);
+  console.log(+'1');
+
+
+  let a = {
+    valueOf() {
+      return 0
+    },
+    toString() {
+      return '1'
+    }
+  }
+
+  console.log(a > -1);  // true
+
+  console.log(4 - '3');
+  console.log('a' + NaN);
+  console.log(1 + NaN);
+</script>

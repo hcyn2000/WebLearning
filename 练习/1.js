@@ -15,4 +15,4 @@ function binarySearch(target, arr) {
     return -1;
 }
 let arrays = [1, 2, 3, 4, 5, 6, 7]
-console.log(binarySearch(6, arrays)); 
+console.log(binarySearch(6, arrays));
