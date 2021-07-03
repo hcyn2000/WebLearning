@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function Parent() {
+        this.name = "Parent";
+        this.sex = "boy";
+      }
+      Parent.prototype.getName = function () {
+        console.log(this.name);
+      };
+      function Child() {
+        this.name = "child";
+      }
+      Child.prototype = new Parent();
+
+      var child1 = new Child();
+      child1.getName();
+      console.log(child1);
+
+      // class 是基于原型的继承的语法糖
+      class Dog {
+        constructor(name, age) {
+          this.name = name;
+          this.age = age;
+        }
+
+        eat() {
+          console.log("肉骨头真好吃");
+        }
+      }
+
+      // 相当于;
+      function Dog(name, age) {
+        this.name = name;
+        this.age = age;
+      }
+
+      Dog.prototype.eat = function () {
+        console.log("肉骨头真好吃");
+      };
+    </script>
+  </body>
+</html>

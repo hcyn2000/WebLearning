@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="" class="example-form">
+      <div>
+        <label for="name">名称</label>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          placeholder="please input your name"
+        />
+      </div>
+      <div>
+        <label for="res">输入</label>
+        <textarea
+          type="multipart"
+          name="res"
+          id="res"
+          placeholder="这里是每一次输入的结果"
+          style="height: 400px; width: 500px"
+        ></textarea>
+      </div>
+    </form>
+
+    <script>
+      window.onload = () => {
+        const inputEle = document.querySelector("#name");
+        const resEle = document.querySelector("#res");
+        inputEle.addEventListener("input", function (event) {
+          // console.log(this.value);
+          outputRes(event.target.value);
+        });
+        function fangdou(fn, time = 500) {
+          let timeout = null;
+          return function (...args) {
+            if (timeout) {
+              clearTimeout(timeout);
+              timeout = null;
+              console.log(timeout);
+            }
+            timeout = setTimeout(() => {
+              fn.apply(this, args);
+            }, time);
+          };
+        }
+
+        function changeOutputVal(value) {
+          resEle.value += `\n${value}`;
+        }
+
+        const outputRes = fangdou(changeOutputVal);
+      };
+    </script>
+  </body>
+</html>

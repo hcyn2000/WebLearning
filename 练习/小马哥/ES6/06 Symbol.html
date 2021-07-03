@@ -1,0 +1,27 @@
+<script>
+  // 原始数据类型 Symbol,它表示独一无二的值
+  // const name = "name";
+  // const name2 = "name";
+  // console.log(name === name2); // true
+
+  // const name = Symbol("name");
+  // const name2 = Symbol("name");
+  // console.log(name === name2); // false
+
+  let s1 = Symbol("s1");
+  let obj = {
+    [s1]: "一诺", // obj[s1] = "一诺";
+  };
+
+  // 如果用Symbol定义的对象中的变量，取值的时候一定要用[变量名]
+  // console.log(obj[s1]); // 一诺
+  // console.log(obj.s1); // undefined
+
+  console.log(Object.keys(obj)); // 空数组, 拿不到值
+
+  // 获取Symbol声明的属性名 （作为对象的key）
+  let s = Object.getOwnPropertySymbols(obj);
+  console.log(s[0]);
+  let m = Reflect.ownKeys(obj);
+  console.log(m[0]);
+</script>

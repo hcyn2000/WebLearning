@@ -1,0 +1,158 @@
+<script>
+  // 1. 带参数默认值的函数
+
+  // ES5写法
+  // function add(a, b) {
+  //   a = a || 10;
+  //   b = b || 20;
+  //   return a + b;
+  // }
+  // console.log(add());
+
+  // ES6写法
+  // function add(a, b = 20) {
+  //   return a + b;
+  // }
+  // console.log(add(10));
+</script>
+<script>
+  // 2. 默认表达式也可以是一个函数
+
+  // function add(a, b = getVal(5)) {
+  //   return a + b;
+  // }
+  // function getVal(val) {
+  //   return val + 5;
+  // }
+  // console.log(add(10));
+</script>
+<script>
+  // 3. 剩余参数
+
+  // es5写法
+  // function pick(obj) {
+  //   let result = Object.create(null);
+  //   console.log(result);
+  //   for (let i = 1; i < arguments.length; i++) {
+  //     result[arguments[i]] = book[arguments[i]];
+  //   }
+  //   return result;
+  // }
+  // let book = {
+  //   title: "es6",
+  //   name: "一诺",
+  //   year: 2021,
+  // };
+  // let bookData = pick(book, "title", "year");
+  // console.log(bookData);
+
+  // es6剩余参数: 由三个点...和一个紧跟着的具名参数指定  ...keys
+  // function pick(obj, ...keys) {
+  //   // ...keys 解决了 arguments 的问题
+  //   let result = Object.create(null);
+  //   keys.forEach((item) => {
+  //     result[item] = obj[item];
+  //   });
+  //   return result;
+  // }
+
+  // let book = {
+  //   title: "es6",
+  //   name: "一诺",
+  //   year: 2021,
+  // };
+  // let bookData = pick(book, "title", "year");
+  // console.log(bookData);
+</script>
+<script>
+  // 4.扩展运算符...
+  // 剩余运算符：把多个独立的合并到一个数组中
+  // 扩展运算符：将一个数组分割，并将各个项作为分离的参数传给函数
+
+  // 处理数组中的最大值，使用apply
+  // const arr = [12, 23, 34, 45, 56, 67, 78, 89];
+  // es5写法
+  // console.log(Math.max.apply(null, arr));
+  // es6扩展运算符
+  // console.log(Math.max(...arr));
+</script>
+<script>
+  // es6的箭头函数
+  // 使用 => 来定义 function(){} = ()=> {}
+
+  // es5
+  // let add = function (a, b) {
+  //   return a + b;
+  // };
+  // console.log(add(1, 2));
+  // es6
+  // let add = (a, b) => {
+  //   return a + b;
+  // };
+  // console.log(add(1, 2));
+  // 直接return可以这样写
+  // let bdd = (val) => val + 5;
+  // console.log(bdd(5));
+
+  // let fn = (function () {
+  //   return function () {
+  //     console.log("lello es6");
+  //   };
+  // })();
+  // fn();
+
+  // let fn = (() => {
+  //   return () => {
+  //     console.log("hello es6 2");
+  //   };
+  // })();
+  // fn();
+</script>
+<script>
+  // es6箭头函数没有this绑定
+
+  // es5中this指向：取决于调用该函数的上下文对象
+  // let pageHandle = {
+  //   id: 123,
+  //   init: function () {
+  //     document.addEventListener("click", function (enent) {
+  //       // 报错 this.doSomeThings is not a function
+  //       this.doSomeThings(event.type);
+  //     });
+  //   },
+  //   doSomeThings: function (type) {
+  //     console.log(`事件类型: ${type},id:${this.id}`);
+  //   },
+  // };
+  // pageHandle.init();
+
+  // es6解决问题
+  // let pageHandle = {
+  //   id: 123,
+  //   init: function () {
+  //     // 一旦使用箭头函数，当前就不存在作用域
+  //     document.addEventListener("click", (enent) => {
+  //       // this.doSomeThings is not a function
+  //       this.doSomeThings(event.type);
+  //     });
+  //   },
+  //   doSomeThings: function (type) {
+  //     console.log(`事件类型: ${type},id:${this.id}`);
+  //   },
+  // };
+  // pageHandle.init();
+
+  // 使用箭头函数的注意事项
+
+  // 1：使用箭头函数  函数内部没有arguments
+  // let getVal = (a, b) => {
+  //   console.log(arguments);
+  //   return a + b;
+  // };
+  // console.log(getVal(1, 2));
+
+  // 2.箭头函数不能使用new关键字来实例化对象
+  // function函数  也是一个对象，但是箭头函数不是一个对象，它其实就是一个函数语法糖
+  // let Person = () => {};
+  // let p = new Person(); // 报错 Person is not a constructor
+</script>

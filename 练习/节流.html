@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="" class="example-form">
+      <div>
+        <label for="name">名称</label>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          placeholder="please input your name"
+        />
+      </div>
+      <div>
+        <label for="res">输入</label>
+        <textarea
+          type="multipart"
+          name="res"
+          id="res"
+          placeholder="这里是每一次输入的结果"
+          style="height: 100px"
+        ></textarea>
+      </div>
+    </form>
+
+    <script>
+      window.onload = function () {
+        const resEle = document.querySelector("#res");
+        function changeOutputVal(value) {
+          resEle.value += `\n${value}`;
+        }
+        function throttle(fun, delay) {
+          let last, deferTimer;
+          return function (args) {
+            let that = this;
+            let _args = arguments;
+
+            let now = +new Date();
+            if (last && now < last + delay) {
+              clearTimeout(deferTimer);
+              deferTimer = setTimeout(function () {
+                last = now;
+                fun.apply(that, _args);
+              }, delay);
+            } else {
+              last = now;
+              fun.apply(that, _args);
+            }
+          };
+        }
+        const outputRes = throttle(changeOutputVal, 2000);
+
+        const inputEle = document.querySelector("#name");
+
+        inputEle.addEventListener("input", (eve) => {
+          outputRes(eve.target.value);
+        });
+      };
+    </script>
+  </body>
+</html>

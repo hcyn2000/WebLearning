@@ -1,0 +1,182 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: rgb(251, 255, 235);
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  width: 50vw;
+}
+.box {
+  position: relative;
+  top: 170px;
+}
+/* 边框 */
+.waikuang {
+  position: relative;
+  background-color: #46c0fc;
+  display: flex;
+  align-items: flex-end;
+  width: 938px;
+  height: 403px;
+  border: 6px solid #a2797f;
+  border-radius: 50% 50% 0 0/100% 100% 0 0;
+  border-bottom: none;
+}
+.neikuang {
+  background-color: #fff;
+  width: 788px;
+  height: 212px;
+  border: 6px solid #a2797f;
+  border-radius: 50% 50% 0 0/100% 100% 0 0;
+  border-bottom: none;
+  margin: 0 auto;
+}
+
+/* 手 */
+.hand {
+  display: flex;
+  align-items: flex-end;
+  background-color: #fff;
+  width: 135px;
+  height: 44px;
+  border: 6px solid #a2797f;
+  border-radius: 50% 50% 0 0/100% 100% 0 0;
+  border-bottom: none;
+}
+.handbgc {
+  background-color: #f0eaed;
+  width: 110px;
+  height: 30px;
+  border-radius: 50% 50% 0 0/100% 100% 0 0;
+  border-bottom: none;
+  margin: 0 auto;
+}
+.left_hand {
+  position: absolute;
+  left: -68px;
+}
+.right_hand {
+  position: absolute;
+  right: -76px;
+}
+
+/* 眼睛 */
+.eyebox {
+  width: 375px;
+  height: 225px;
+  margin: 0 auto;
+  position: absolute;
+  left: 50%;
+  top: 77px;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+.eye {
+  background-color: #fff;
+  width: 185px;
+  height: 225px;
+  border: 4px solid #aa8685;
+  border-radius: 50% 50% 50% 50%;
+}
+.left_eye {
+  position: absolute;
+  right: 50%;
+}
+.right_eye {
+  position: absolute;
+  left: 50%;
+}
+.eyezhu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: 70px;
+  height: 70px;
+  border: 4px solid #7c4e4b;
+  background-color: #5e2b23;
+  border-radius: 50%;
+}
+.eyefff {
+  width: 27px;
+  height: 27px;
+  background-color: #fff;
+  border-radius: 50%;
+}
+.eyezhu-left {
+  position: absolute;
+  top: 76px;
+  right: 20px;
+}
+.eyezhu-right {
+  position: absolute;
+  top: 76px;
+  left: 20px;
+}
+/* 鼻子 */
+.nose {
+  width: 106px;
+  height: 106px;
+  background-color: #e12129;
+  border-radius: 50%;
+  position: absolute;
+  top: 245px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  box-shadow: inset -8px -8px 30px 0px #8f0202;
+}
+.reflection {
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  width: 30px;
+  height: 30px;
+  background-color: #f99daf;
+  border-radius: 50%;
+  filter: blur(5px);
+}
+/* 胡须 */
+.beard {
+  width: 110px;
+  height: 8px;
+  border: 6px solid #86504d;
+  border-radius: 50% 50% 0 0/100% 100% 0 0;
+  border-bottom: none;
+}
+.beard1 {
+  position: absolute;
+  top: 278px;
+  left: 128px;
+  transform: rotate(20deg);
+}
+.beard2 {
+  position: absolute;
+  top: 345px;
+  left: 116px;
+  transform: rotate(6deg);
+}
+.beard3 {
+  position: absolute;
+  top: 278px;
+  right: 128px;
+  transform: rotate(-20deg);
+}
+.beard4 {
+  position: absolute;
+  top: 345px;
+  right: 116px;
+  transform: rotate(-6deg);
+}
+
+.verticalLine {
+  background-color: #b17d64;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 9px;
+  height: 55px;
+}

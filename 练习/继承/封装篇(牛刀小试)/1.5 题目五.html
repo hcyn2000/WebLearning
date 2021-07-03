@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function Person(name, sex) {
+        this.name = name;
+        this.sex = sex;
+        var evil = "我很邪恶";
+        var pickNose = function () {
+          console.log("我会扣鼻子但不让你看见");
+        };
+        this.drawing = function (type) {
+          console.log("我要画一幅" + type);
+        };
+      }
+      Person.fight = function () {
+        console.log("打架");
+      };
+      Person.prototype.wc = function () {
+        console.log("我是个人我会wc");
+      };
+      var p1 = new Person("lindaidai", "boy");
+      console.log(p1.name); // lindaidai
+      console.log(p1.evil); // undefined
+      p1.drawing("国画"); // 我要画一幅国画
+      p1.pickNose(); // 报错
+      p1.fight(); // 报错
+      p1.wc(); // 我是个人我会wc
+      Person.fight(); //打架
+      Person.wc(); // 报错
+      console.log(Person.sex); // boy
+    </script>
+  </body>
+</html>

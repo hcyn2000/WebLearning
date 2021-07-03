@@ -1,0 +1,31 @@
+<script>
+  // es6 直接写入变量和函数，作为对象的属性和方法
+
+  // const name = "好吃",
+  //   age = 20;
+  // const person = {
+  //   name, // 等价于name: name
+  //   age,
+  //   sayName() {
+  //     console.log("哈哈哈");
+  //   },
+  // };
+  // person.sayName();
+
+  // function fn(x, y) {
+  //   return { x, y };
+  // }
+  // console.log(fn(10, 12));
+
+  // 对象的方法
+
+  // is() 等于 ===   用来比较两个值是否严格相等
+  // console.log(NaN === NaN); // false
+  // console.log(Object.is(NaN, NaN)); // true
+
+  // assign() 对象的合并
+  // Object.assign(target,obj1,obj2...)
+  // 返回合并之后的新对象
+  let newObj = Object.assign({}, { a: 1 }, { b: 2 });
+  console.log(newObj);
+</script>
