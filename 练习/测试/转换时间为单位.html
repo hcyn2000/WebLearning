@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <audio
+    src="http://m701.music.126.net/20210123174410/2764aa985dc915df4c70c8ff2e560f96/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/4632083275/36da/5cd3/8c4d/b54b269c0d74ce26a5d38e0d53b460e3.mp3"
+    controls></audio>
+  <script>
+    let myVid = document.querySelector('audio')
+    if (myVid != null) {
+      myVid.load();
+      myVid.oncanplay = function () {
+        console.log("myVid.duration", myVid.duration);
+      }
+    }
+
+    function songTimeFormat(time) {
+      //分钟
+      var minute = time / 60;
+      var minutes = parseInt(minute);
+
+      if (minutes < 10) {
+        minutes = "0" + minutes;
+      }
+
+      //秒
+      var second = time % 60;
+      var seconds = Math.round(second);
+      if (seconds < 10) {
+        seconds = "0" + seconds;
+      }
+      if (minutes && seconds) {
+        return `${minutes}:${seconds}`;
+      }
+      // return '00:00';
+    }
+    console.log(songTimeFormat(306.834286));
+
+
+    function timestampToTime(timestamp) {
+      var date = new Date(timestamp * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+      var m = date.getMinutes();
+      if (m < 10) {
+        m = "0" + m;
+      }
+      var s = date.getSeconds();
+      if (s < 10) {
+        s = "0" + s;
+      }
+      return `${m}:${s}`;
+    }
+    console.log(timestampToTime(306.834286));
+  </script>
+</body>
+
+</html>
