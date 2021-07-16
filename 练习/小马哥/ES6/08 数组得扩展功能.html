@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+    </ul>
+    <script>
+      // 数组的方法
+
+      // 1. from() 将伪数组转换成真正的数组
+      function add() {
+        console.log(arguments);
+        // es5转换
+        // let arr = [].slice.call(arguments);
+        // console.log(arr);
+
+        // es6
+        let arr = Array.from(arguments);
+        console.log(arr);
+      }
+      add(1, 2, 3);
+
+      let lis = document.querySelectorAll("li");
+      console.log(lis);
+      console.log(Array.from(lis));
+
+      console.log([...lis]);
+
+      // from()  还可以接受第二个参数，用来对每个元素进行处理
+      let liContents = Array.from(lis, (ele) => ele.textContent);
+      console.log(liContents);
+
+      console.log("----------------------------");
+
+      // 2. of() 将任意的数据类型，转换为数组
+      console.log(Array.of(1, 2, [11, 22], { id: 1 }));
+      console.log("-------------------------------");
+
+      // 3. copyWithin()  将指定位置的成员复制到其他位置（会覆盖原有成员），然后返回当前数组
+      let arr = [1, 2, 3, 4, 5, 6].copyWithin(0, 2, 5);
+      console.log(arr); // [3, 4, 5, 4, 5, 6]
+      console.log("----------------------------");
+
+      // 4. find() 直到找出第一个返回值为true的成员，然后返回该成员。如果没有符合条件的成员，则返回undefined。
+      let item = [1, 2, 3, -4, -5, -6].find((item) => item < 0);
+      console.log(item);
+
+      // findIndex()  返回第一个符合条件的数组成员的位置，如果所有成员都不符合条件，则返回-1
+      let item2 = [1, 2, 3, -4, -5, -6].findIndex((item) => item < 0);
+      console.log(item2);
+      console.log("--------------------------------------");
+      //5. entries()  keys()  values()  返回一个遍历器  可以使用for...of循环进行遍历
+
+      // keys()  对键名遍历
+      // values()  对键值遍历
+      // entries()  对键值对遍历
+      for (let index of ["a", "b"].keys()) {
+        console.log(index);
+      }
+      // 0
+      // 1
+
+      for (let elem of ["a", "b"].values()) {
+        console.log(elem);
+      }
+      // 'a'
+      // 'b'
+
+      for (let [index, elem] of ["a", "b"].entries()) {
+        console.log(index, elem);
+      }
+      // 0 "a"
+      // 1 "b"
+
+      // 6. includes() 返回一个布尔值，表示某个数组是否包含给定的值
+      [1, 2, 3].includes(2); // true
+      [1, 2, 3].includes(4); // false
+      [1, 2, NaN].includes(NaN); // true
+
+      // 该方法的第二个参数表示搜索的起始位置，默认为0。如果第二个参数为负数，则表示倒数的位置，如果这时它大于数组长度（比如第二个参数为-4，但数组长度为3），则会重置为从0开始。
+      [1, 2, 3].includes(3, 3); // false
+      [1, 2, 3].includes(3, -1); // true
+
+      // flat()，flatMap()
+      // flat()  用于将嵌套的数组“拉平”，变成一维的数组。该方法返回一个新数组，对原数据没有影响。
+      [1, 2, [3, 4]].flat(); // [1, 2, 3, 4]
+      // 如果不管有多少层嵌套，都要转成一维数组，可以用Infinity关键字作为参数。
+      [1, [2, [3]]].flat(Infinity); // [1, 2, 3]
+
+      // flatMap() 对原数组的每个成员执行一个函数 该方法返回一个新数组，不改变原数组。
+      let arr2 = [1, 2, 3].flatMap((x) => x * 3);
+      console.log(arr2);
+    </script>
+
+    <script>
+      // let item3 = [1, 2, 3, -4, -5, -6].map((item) => item < 0);
+      // console.log(item3);
+
+      // let item4 = [1, 2, 3, -4, -5, -6].filter((item) => item < 0);
+      // console.log(item4);
+    </script>
+  </body>
+</html>

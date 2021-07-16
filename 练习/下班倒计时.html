@@ -46,7 +46,9 @@
 
         var oldTime = oDate.getTime(); //现在距离1970年的毫秒数
 
-        var newDate = new Date("2021/6/" + oDate.getDate() + " 18:00:00");
+        var newDate = new Date(
+          "2021/" + (oDate.getMonth() + 1) + "/" + oDate.getDate() + " 18:00:00"
+        );
 
         var newTime = newDate.getTime(); //2019年距离1970年的毫秒数
 

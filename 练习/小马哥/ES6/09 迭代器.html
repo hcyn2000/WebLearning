@@ -1,0 +1,15 @@
+<script>
+  // Iterator  是一种新的遍历机制
+  // 1. 迭代器是一个接口，能快捷得访问数据，通过Symbol.iterator来创建迭代去  通过迭代器得next来获取迭代之后得结果
+  // 2. 迭代器是用于遍历数据结构的指针(数据库得游标)
+
+  // 使用迭代
+  const items = ["one", "two", "three"];
+  // 1. 创建新的迭代器
+  const ite = items[Symbol.iterator]();
+  // done如果为false表示遍历继续  如果为true表示遍历完成
+  console.log(ite.next()); // {value: "one", done: false}
+  console.log(ite.next()); // {value: "two", done: false}
+  console.log(ite.next()); // {value: "three", done: false}
+  console.log(ite.next()); // {value: undefined, done: true}
+</script>
