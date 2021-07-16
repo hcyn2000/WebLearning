@@ -1,0 +1,27 @@
+<script>
+  setInterval(() => {
+    let timeout = new Date()
+    let shi = timeout.getHours()
+    let fen = timeout.getMinutes()
+    let miao = timeout.getSeconds()
+    console.log(shijian(shi, fen, miao));
+  }, 1000);
+  function shijian(a, b, c) {
+    let s = 24 - a
+    if (s < 10) {
+      s = '0' + s
+    }
+
+    let f = 59 - b
+    if (f < 10) {
+      f = '0' + f
+    }
+
+    let m = 59 - c
+    if (m < 10) {
+      m = '0' + m
+    }
+    return s + ':' + f + ':' + m
+  }
+
+</script>
