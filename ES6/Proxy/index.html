@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" id="input1" />
+
+    <input type="text" id="input" />
+
+    <script>
+      let obj = {
+        age: 20,
+      };
+      let validator = {
+        get: function (obj, key) {
+          return obj[key];
+        },
+        set: function (obj, key, value) {
+          obj[key] = value;
+          return true;
+        },
+      };
+
+      let proxy = new Proxy(obj, validator);
+      let input1 = document.querySelector("#input1");
+      let input = document.querySelector("#input");
+
+      input1.value = obj.age;
+      input.value = proxy.age;
+
+      input.addEventListener("input", function functionAge(e) {
+        proxy.age = input.value;
+        input1.value = obj.age;
+      });
+
+      input1.addEventListener("input", function functionAge(e) {
+        obj.age = input1.value;
+        input.value = proxy.age;
+      });
+    </script>
+  </body>
+</html>
