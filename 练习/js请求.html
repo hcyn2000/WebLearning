@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="dianji">1234</div>
+    <script>
+      let dianji = document.querySelector(".dianji");
+      dianji.addEventListener("click", function () {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("POST", "http://diyue.x951.top:9101/sso/appPasswordLogin");
+        xmlHttp.setRequestHeader("content-type", "application/json");
+        xmlHttp.setRequestHeader(
+          "authorization",
+          "eyJhbGciOiJIUzI1NiJ9.eyJjbGllbnRJZCI6IjA4ZDY5ZDUzLTYwMDMtYjBmNy1jNzlhLTUyMzc0NDAwMDAwNSIsImV4cGlyZVRpbWUiOjE2MzMyMzI5NTMsImV4cCI6MTYzMzIzMjk1MywidXNlcklkIjoiMTQxNzAyMDUzMDMyOTkxMTMwMCJ9.WykbMm3ctoOyo9lrPMd-BLv4OU_iMQBI55EauT_bBvY"
+        );
+        let obj = {
+          clientId: "08d69d53-6003-b0f7-c79a-523744000005",
+          loginName: "ncbwxy",
+          passWord: "diyue@2020",
+        };
+        var stringData = JSON.stringify(obj);
+        xmlHttp.send(stringData);
+        xmlHttp.onreadystatechange = function () {
+          //complete
+          if (xmlHttp.status == 200) {
+            mxUtils.confirm(mxResources.get("saveSuccess"), true);
+          } else {
+            //请求失败的回调函数
+            console.log("保存失败");
+          }
+        };
+      });
+    </script>
+  </body>
+</html>
