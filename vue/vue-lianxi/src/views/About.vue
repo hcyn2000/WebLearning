@@ -15,9 +15,9 @@
 import ScrollNum from "../components/ScrollNum.vue";
 
 export default {
-  name: "App",
+  name: "About",
   components: { ScrollNum },
-  data: () => ({ num: 15798002275 }),
+  data: () => ({ num: 12345678 }),
   computed: {
     numArr() {
       let arr = [];

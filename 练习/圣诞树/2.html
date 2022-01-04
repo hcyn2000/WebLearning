@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>动态添加新元素</title>
+  </head>
+  <body>
+    <ul class="example">
+      <li class="child">Coffee</li>
+      <li class="child">Tea</li>
+      <li class="child">Coffee</li>
+      <li class="child">Tea</li>
+    </ul>
+
+    <script>
+      var child = document.getElementsByClassName("child")[0];
+      var newChild = document.createElement("li");
+      var newText = document.createTextNode("hhhh");
+      newChild.appendChild(newText);
+      let childV = document.createAttribute("class");
+      childV.value = "child";
+      newChild.setAttributeNode(childV);
+      child.appendChild(newChild);
+    </script>
+  </body>
+</html>

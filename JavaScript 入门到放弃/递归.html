@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr = [
+        {
+          name: "张三",
+          sex: 1,
+          children: [
+            {
+              name: "张一三",
+              sex: 1,
+              children: [{ name: "张一一三", sex: 0 }],
+            },
+            {
+              name: "张二三",
+              sex: 1,
+              hide: true,
+              children: [
+                {
+                  name: "张二一三",
+                  sex: 0,
+                  children: [{ name: "张二一一三", sex: 0 }],
+                },
+                {
+                  name: "张二二三",
+                  sex: 0,
+                },
+              ],
+            },
+          ],
+        },
+      ];
+
+      function recursion(arr) {
+        let list = [];
+        arr.forEach((item) => {
+          let v = item;
+          v.sex_zh = v.sex == 1 ? "男" : "女";
+          // list.push(v);
+          if (v.children) {
+            v.children = recursion(v.children);
+          }
+          !v.hide ? list.push(v) : null;
+        });
+        return list;
+      }
+
+      console.log(recursion(arr));
+    </script>
+  </body>
+</html>
