@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>柯里化</title>
+  </head>
+  <body>
+    <script>
+      const curry = (func, ...args) => {
+        // 获取函数的参数个数
+        const fnLen = func.length;
+        return function (...innerArgs) {
+          innerArgs = args.concat(innerArgs);
+          // 参数未搜集足的话，继续递归搜集
+          if (innerArgs.length < fnLen) {
+            return curry.call(this, func, ...innerArgs);
+          } else {
+            // 否则拿着搜集的参数调用func
+            func.apply(this, innerArgs);
+          }
+        };
+      };
+      // 测试
+      const add = curry((num1, num2, num3) => {
+        console.log(num1, num2, num3, num1 + num2 + num3);
+      });
+
+      // add(1)(2)(3); // 1 2 3 6
+      add(1, 2)(3); // 1 2 3 6
+      // add(1, 2, 3); // 1 2 3 6
+      // add(1)(2, 3); // 1 2 3 6
+    </script>
+  </body>
+</html>
