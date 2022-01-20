@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>9.Vue监测数据改变的原理_数组</title>
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <!-- 准备好一个容器-->
+    <div id="root">
+      <button @click="student.age++">年龄+1岁</button> <br />
+      <button @click="addSex">添加性别属性，默认值：男</button> <br />
+      <button @click="student.sex = '未知' ">修改性别</button> <br />
+      <button @click="addFriend">在列表首位添加一个朋友</button> <br />
+      <button @click="updateFirstFriendName">修改第一个朋友的名字为：张三</button> <br />
+      <button @click="addHobby">添加一个爱好</button> <br />
+      <button @click="updateHobby">修改第一个爱好为：开车</button> <br />
+      <button @click="removeSmoke">过滤掉爱好中的抽烟</button> <br />
+
+      <h2>姓名: {{student.name}}</h2>
+      <h2 v-if="student.sex">性别: {{student.sex}}</h2>
+      <h2>年龄: {{student.age}}</h2>
+      <h2>朋友</h2>
+      <ul>
+        <li v-for="(item,index) in student.friends" :key="index">{{item.name}}-{{item.age}}</li>
+      </ul>
+      <h2>爱好</h2>
+      <ul>
+        <li v-for="(item,index) in student.hobby" :key="index">{{item}}</li>
+      </ul>
+    </div>
+  </body>
+
+  <script type="text/javascript">
+    Vue.config.productionTip = false; //阻止 vue 在启动时生成生产提示。
+
+    const vm = new Vue({
+      el: "#root",
+      data: {
+        student: {
+          name: "tom",
+          age: 12,
+          hobby: ["跑步", "跳水", "抽烟"],
+          friends: [
+            { name: "jerry", age: 35 },
+            { name: "tony", age: 33 },
+          ],
+        },
+      },
+      methods: {
+        addSex() {
+          this.$set(this.student, "sex", "男");
+        },
+        addFriend() {
+          this.student.friends.unshift({ name: "机甲", age: 33 });
+        },
+        updateFirstFriendName() {
+          this.student.friends[0].name = "张三";
+        },
+        addHobby() {
+          this.student.hobby.push("吃饭");
+        },
+        updateHobby() {
+          this.student.hobby.splice(0, 1, "开车");
+        },
+        removeSmoke() {
+          // let f = this.student.hobby.indexOf("抽烟");
+          // this.student.hobby.splice(f, 1);
+
+          this.student.hobby = this.student.hobby.filter((h) => h !== "抽烟");
+        },
+      },
+    });
+  </script>
+</html>

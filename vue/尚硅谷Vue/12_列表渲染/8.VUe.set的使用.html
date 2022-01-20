@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>8.VUe.set的使用</title>
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <!-- 准备好一个容器-->
+    <div id="root">
+      <h2>学校: {{name}}</h2>
+      <h2>地址: {{address}}</h2>
+      <h2>校长: {{leader}}</h2>
+      <hr />
+      <button @click="addSex">添加性别</button>
+      <h2>姓名: {{student.name}}</h2>
+      <h2>性别: {{student.sex}}</h2>
+      <h2>年龄: 真实{{student.age.rAge}}，对外{{student.age.sAge}}</h2>
+      <h2>朋友</h2>
+      <ul>
+        <li v-for="(item,index) in student.friends" :key="index">{{item.name}}-{{item.age}}</li>
+      </ul>
+    </div>
+  </body>
+
+  <script type="text/javascript">
+    Vue.config.productionTip = false; //阻止 vue 在启动时生成生产提示。
+
+    const vm = new Vue({
+      el: "#root",
+      data: {
+        name: "五道口",
+        address: "北京",
+        student: {
+          name: "tom",
+          age: {
+            rAge: 40,
+            sAge: 29,
+          },
+          friends: [
+            { name: "jerry", age: 35 },
+            { name: "tony", age: 33 },
+          ],
+        },
+      },
+      methods: {
+        addSex() {
+          // this.student.sex = "男";
+          this.$set(this.student, "sex", "男");
+          this.leader = "hh";
+        },
+      },
+    });
+  </script>
+</html>

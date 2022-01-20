@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>2.key的原理</title>
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <!-- 准备好一个容器-->
+    <div id="root">
+      <!-- 遍历数组 -->
+      <h2>人员列表</h2>
+      <button @click.once="add">添加男暖</button>
+      <ul>
+        <li v-for="(item,index) in perasonList" :key="item.id">
+          {{item.name}}-{{item.age}}
+          <input type="text" />
+        </li>
+      </ul>
+    </div>
+  </body>
+
+  <script type="text/javascript">
+    Vue.config.productionTip = false; //阻止 vue 在启动时生成生产提示。
+
+    new Vue({
+      el: "#root",
+      data: {
+        perasonList: [
+          { id: "001", name: "张三", age: 18 },
+          { id: "002", name: "李四", age: 19 },
+          { id: "003", name: "王五", age: 20 },
+        ],
+      },
+      methods: {
+        add() {
+          let item = { id: "004", name: "男暖", age: 24 };
+          this.perasonList.unshift(item);
+        },
+      },
+    });
+  </script>
+</html>
