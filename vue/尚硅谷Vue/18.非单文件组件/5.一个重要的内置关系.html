@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>模板语法</title>
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <!-- 准备好一个容器-->
+    <div id="root">
+      <school></school>
+    </div>
+  </body>
+
+  <script type="text/javascript">
+    Vue.config.productionTip = false; //阻止 vue 在启动时生成生产提示。
+
+    Vue.prototype.x = 99;
+
+    const school = Vue.extend({
+      name: "school",
+      template: `
+        <div>
+          <h2>南昌大学</h2>
+          <button @click="showX">点击</button>
+        </div>
+      `,
+      methods: {
+        showX() {
+          console.log(this);
+          console.log(this.x);
+        },
+      },
+    });
+
+    const vm = new Vue({
+      el: "#root",
+      data: {},
+      components: { school },
+    });
+    console.log(vm.x);
+  </script>
+</html>
