@@ -15,6 +15,7 @@ export default {
   //   info: Object,
   // },
 
+  // 接收的同时对数据进行类型限制+默认值的指定+必要性的限制
   props: {
     info: {
       type: Object, // 类型是什么

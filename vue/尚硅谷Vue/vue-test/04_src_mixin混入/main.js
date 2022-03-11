@@ -6,6 +6,9 @@ import App from "./App.vue";
 // 关闭Vue的生产提升
 Vue.config.productionTip = false;
 
+// import { mixin } from "./mixin";
+// Vue.mixin(mixin);
+
 // 创建vm
 new Vue({
   render: (h) => h(App),
