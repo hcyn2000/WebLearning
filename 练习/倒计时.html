@@ -1,0 +1,127 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>倒计时动作</title>
+		<script type="text/javascript" src="JavaScript/miaosha.js"></script>
+	</head>
+	<body onload="oneRecordTime()">
+	<!--设置秒杀时间块-->
+		<div class="img-box">
+			<span id="hour"></span>:
+			<span id="munite"></span>:
+			<span id="second"></span>
+			<div id="bot-box">
+			<img id="img" src="http://218.65.96.111:81/982224493/1.jpg" style="width:70%;height:70%"></img>
+			</div>
+		</div>
+	</body>
+<script>
+var recordTime = null;
+function oneRecordTime(){
+let now = new Date();
+recordTime = new Date(now.setSeconds(now.getSeconds()+10)).pattern("yyyy-MM-dd HH:mm:ss");
+fresh();
+}
+Date.prototype.pattern=function(fmt) {         
+    var o = {         
+    "M+" : this.getMonth()+1, //月份         
+    "d+" : this.getDate(), //日         
+    "h+" : this.getHours()%12 == 0 ? 12 : this.getHours()%12, //小时         
+    "H+" : this.getHours(), //小时         
+    "m+" : this.getMinutes(), //分         
+    "s+" : this.getSeconds(), //秒         
+    "q+" : Math.floor((this.getMonth()+3)/3), //季度         
+    "S" : this.getMilliseconds() //毫秒         
+    };         
+    var week = {         
+    "0" : "/u65e5",         
+    "1" : "/u4e00",         
+    "2" : "/u4e8c",         
+    "3" : "/u4e09",         
+    "4" : "/u56db",         
+    "5" : "/u4e94",         
+    "6" : "/u516d"        
+    };         
+    if(/(y+)/.test(fmt)){         
+        fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));         
+    }         
+    if(/(E+)/.test(fmt)){         
+        fmt=fmt.replace(RegExp.$1, ((RegExp.$1.length>1) ? (RegExp.$1.length>2 ? "/u661f/u671f" : "/u5468") : "")+week[this.getDay()+""]);         
+    }         
+    for(var k in o){         
+        if(new RegExp("("+ k +")").test(fmt)){         
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));         
+        }         
+    }         
+    return fmt;         
+}    
+function fresh() {
+	var nowtime=new Date();
+	var endtime = null;
+	if(recordTime == null){
+		return;
+	}else{
+		//let diffDate = new Date(recordTime);
+		endtime = new Date(recordTime);
+		//diffDate.setSeconds(diffDate.getSeconds()-1);
+		//recordTime = diffDate.pattern("yyyy-MM-dd HH:mm:ss");
+	}
+	//var timeAdd = new Date(datetime.setMinutes(datetime.getMinutes()+1));
+	//console.log(timeAdd.pattern("yyyy-MM-dd HH:mm:ss"));
+	// console.log(endtime)
+	if(endtime == null){
+		return;
+	}
+	//endtime = new Date(timeAdd.pattern("yyyy-MM-dd HH:mm:ss"));
+	// console.log(endtime);
+	var leftsecond=parseInt((endtime.getTime() - nowtime.getTime())/1000);
+	// console.log(leftsecond);
+	h=parseInt(leftsecond/3600);
+	m=parseInt((leftsecond/60)%60);
+	s=parseInt(leftsecond%60);
+	if(h<10){
+		h="0"+h;
+	}
+	if(m<10&&m>=0){
+		m = "0"+m;
+	}else if(m<0){
+		m="00";
+	}
+	if(s<10&&s>=0){
+		s = "0"+s;
+	}else if(s<0){
+		s="00";
+	}
+	document.getElementById('hour').innerHTML=h;
+	document.getElementById('munite').innerHTML=m;
+	document.getElementById('second').innerHTML=s;
+	if(leftsecond<=0){
+		clearInterval(sh);
+		setTimeout(() => {
+			updateImg();
+		}, 0);
+	}
+	
+}
+let img = true
+async function updateImg(){
+	await	sleep(3000)
+	document.getElementById('img').src = `http://218.65.96.111:81/982224493/${img ? 2:1}.jpg`;
+	img = !img
+	oneRecordTime();
+	sh = setInterval(fresh,1000);
+}
+var sh=setInterval(fresh,1000);
+
+async function sleep(numberMillis) {
+		var now = new Date();
+    var exitTime = now.getTime() + numberMillis;
+    while (true) {
+        now = new Date();
+        if (now.getTime() > exitTime)
+        return ;
+    }
+
+}
+</script>
+</html>
