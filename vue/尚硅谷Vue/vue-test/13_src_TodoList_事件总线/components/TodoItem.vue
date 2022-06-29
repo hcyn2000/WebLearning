@@ -11,7 +11,15 @@
 <script>
 export default {
   name: "TodoItem",
-  props: ["item", "checkItemTodo", "deleteItemTodo"],
+  props: ["item"],
+  methods: {
+    checkItemTodo(id) {
+      this.$bus.$emit("checkItemTodo", id);
+    },
+    deleteItemTodo(id) {
+      this.$bus.$emit("deleteItemTodo", id);
+    },
+  },
 };
 </script>
 

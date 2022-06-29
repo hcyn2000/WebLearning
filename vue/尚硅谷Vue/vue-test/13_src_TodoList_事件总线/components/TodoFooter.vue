@@ -13,7 +13,7 @@
 <script>
 export default {
   name: "TodoFooter",
-  props: ["todos"],
+  props: ["todos", "footerCheckTodo", "deleteDoneTodo"],
   data() {
     return {};
   },
@@ -30,13 +30,8 @@ export default {
         return this.dones === this.total && this.total > 0;
       },
       set(value) {
-        this.$emit("footerCheckTodo", value);
+        this.footerCheckTodo(value);
       },
-    },
-  },
-  methods: {
-    deleteDoneTodo() {
-      this.$emit("deleteDoneTodo");
     },
   },
 };
