@@ -6,22 +6,24 @@
 </template>
 
 <script>
+import pubsub from "pubsub-js";
 export default {
   name: "School",
   data() {
     return {
       name: "抚州一中",
       address: "抚州",
+      pubId: null,
     };
   },
   methods: {},
   mounted() {
-    this.$bus.$on("hello", (res) => {
-      console.log("触发了", res);
+    this.pubId = pubsub.subscribe("hello", (msg, data) => {
+      console.log(data);
     });
   },
   beforeDestroy() {
-    this.$bus.$off("hello");
+    pubsub.unsubscribe(this.pubId);
   },
 };
 </script>

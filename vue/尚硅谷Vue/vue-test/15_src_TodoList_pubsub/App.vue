@@ -18,6 +18,9 @@
 import TodoHeader from "./components/TodoHeader.vue";
 import TodoList from "./components/TodoList.vue";
 import TodoFooter from "./components/TodoFooter.vue";
+
+import pubsub from "pubsub-js";
+
 export default {
   name: "App",
   components: { TodoHeader, TodoList, TodoFooter },
@@ -25,6 +28,8 @@ export default {
   data() {
     return {
       todos: JSON.parse(localStorage.getItem("todos")) || [],
+      pubId1: null,
+      pubId2: null,
     };
   },
   watch: {
@@ -42,21 +47,14 @@ export default {
     },
 
     // 勾选todo
-    checkItemTodo(id) {
+    checkItemTodo(msg, id) {
       this.todos.forEach((item) => {
         if (item.id == id) item.done = !item.done;
       });
     },
 
-    // 修改todo值
-    updateTodo(id, title) {
-      this.todos.forEach((item) => {
-        if (item.id == id) item.title = title;
-      });
-    },
-
     // 删除todo
-    deleteItemTodo(id) {
+    deleteItemTodo(msg, id) {
       this.todos = this.todos.filter((item) => item.id !== id);
     },
 
@@ -67,18 +65,16 @@ export default {
       });
     },
 
-    // 清除完成的任务
     deleteDoneTodo() {
       this.todos = this.todos.filter((item) => !item.done);
     },
   },
   mounted() {
-    this.$bus.$on("checkItemTodo", this.checkItemTodo);
-    this.$bus.$on("deleteItemTodo", this.deleteItemTodo);
-    this.$bus.$on("updateTodo", this.updateTodo);
-  },
-  beforeDestroy() {
-    this.$bus.$off(["checkItemTodo", "deleteItemTodo", "updateTodo"]);
+    // this.$bus.$on("checkItemTodo", this.checkItemTodo);
+    // this.$bus.$on("deleteItemTodo", this.deleteItemTodo);
+
+    this.pubId1 = pubsub.subscribe("checkItemTodo", this.checkItemTodo);
+    this.pubId1 = pubsub.subscribe("deleteItemTodo", this.deleteItemTodo);
   },
 };
 </script>
@@ -107,20 +103,10 @@ body {
   background-color: #da4f49;
   border: 1px solid #bd362f;
 }
-.btn-edit {
-  margin-right: 8px;
-  color: #fff;
-  background-color: skyblue;
-  border: 1px solid #6da4b9;
-}
 
 .btn-danger:hover {
   color: #fff;
   background-color: #bd362f;
-}
-.btn-edit:hover {
-  color: #fff;
-  background-color: #6da4b9;
 }
 
 .btn:focus {
