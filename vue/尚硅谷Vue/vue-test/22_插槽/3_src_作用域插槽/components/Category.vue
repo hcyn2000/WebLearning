@@ -1,7 +1,7 @@
 <template>
   <div class="category">
     <h3>{{ title }}分类</h3>
-    <slot>没传值，显示默认</slot>
+    <slot :games="games">没传值，显示默认1。</slot>
   </div>
 </template>
 
@@ -9,6 +9,11 @@
 export default {
   name: "Category",
   props: ["title"],
+  data() {
+    return {
+      games: ["QQ飞车", "穿越火线", "LOL"],
+    };
+  },
 };
 </script>
 
