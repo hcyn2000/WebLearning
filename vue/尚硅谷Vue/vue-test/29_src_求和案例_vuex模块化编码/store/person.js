@@ -5,7 +5,7 @@ const personOptions = {
   namespaced: true,
   actions: {
     addPersonWu(context, value) {
-      if (value.name.indexOf("吴") === 0) {
+      if (value.name.startsWith("吴")) {
         context.commit("ADD_PERSON", value);
       }
     },
