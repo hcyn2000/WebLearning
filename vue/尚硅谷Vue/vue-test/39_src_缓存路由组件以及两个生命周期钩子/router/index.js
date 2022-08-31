@@ -21,22 +21,14 @@ const router = new VueRouter({
           children: [
             {
               name: "xiangqing",
-              path: "detail/:id/:title",
+              path: "detail",
               component: () => import("../pages/Detail.vue"),
-
-              // props的第一种写法，值为对象，该对象中的所有键值对都会以props的形式传给Detail组件
-              // props: { a: 1, b: "hello" },  // 只能写死
-
-              // props的第二种写法，值为布尔值，若布尔值为真，就会把该路由组件收到的所有params参数，以props的形式传给Detail组件  只能是params形式
-              // props: true,
 
               // props的第三种写法，值为函数,会收到$route，返回值必须是对象
               props($route) {
-                // return { id: $route.query.id, title: $route.query.title }; //query形式
-                return { id: $route.params.id, title: $route.params.title }; // params形式
+                return { id: $route.query.id, title: $route.query.title }; //query形式
+                // return { id: $route.params.id, title: $route.params.title }; // params形式
               },
-
-              // https://blog.csdn.net/qzw752890913/article/details/123400033
             },
           ],
         },

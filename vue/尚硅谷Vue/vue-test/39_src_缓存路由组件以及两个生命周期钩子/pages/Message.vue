@@ -9,7 +9,8 @@
         <router-link :to="{ name: 'xiangqing', params: { id: m.id, title: m.title } }">
           {{ m.title }}
         </router-link>
-
+        <button @click="pushShow(m)">push查看</button>
+        <button @click="replaceShow(m)">replace查看</button>
         &nbsp;&nbsp;
       </li>
     </ul>
@@ -29,7 +30,25 @@ export default {
       ],
     };
   },
-  methods: {},
+  methods: {
+    pushShow(m) {
+      // 不带参数
+      // this.$router.push("/home/message/detail");
+      // this.$router.push({ path: "/home/message/detail" });
+      // this.$router.push({ name: "xiangqing" });
+      // query传参
+      this.$router.push({ name: "xiangqing", query: { id: m.id, title: m.title } });
+      // this.$router.push({ path: "/home/message/detail", query: { id: m.id, title: m.title } });
+      // params传参
+      // this.$router.push({ name: "xiangqing", params: { id: m.id, title: m.title } });
+    },
+    replaceShow(m) {
+      this.$router.replace({ name: "xiangqing", query: { id: m.id, title: m.title } });
+    },
+  },
+  beforeDestroy() {
+    console.log("Message组件即将被销毁");
+  },
 };
 </script>
 
