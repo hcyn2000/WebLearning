@@ -1,6 +1,7 @@
 import Vue from "vue"
 import App from "./App.vue"
-import router from "./router"
+import router from "./router" // 引入路由
+import store from "./store" // 引入vuex
 
 // 注册三级联动--全局组件
 import TypeNav from "@/components/TypeNav"
@@ -11,5 +12,6 @@ Vue.config.productionTip = false
 
 new Vue({
   router,
+  store,
   render: (h) => h(App),
 }).$mount("#app")
