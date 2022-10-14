@@ -1,7 +1,51 @@
 <template>
   <div class="type-nav">
     <div class="container">
-      <h2 class="all">全部商品分类</h2>
+      <div @mouseenter="enterShow" @mouseleave="leaveShow">
+        <h2 class="all">全部商品分类</h2>
+        <transition name="sort">
+          <div class="sort" v-show="productListShow">
+            <div class="all-sort-list2" @click="goSearch">
+              <div
+                class="item"
+                v-for="(c1, index) in categoryList"
+                :key="c1.categoryId"
+                @mouseenter="changeIndex(index)"
+                @mouseleave="leaveIndex"
+                :style="{ background: currentIndex == index ? 'skyblue' : '' }"
+              >
+                <h3>
+                  <a :data-categoryName="c1.categoryName" :data-category1Id="c1.categoryId">
+                    {{ c1.categoryName }}</a
+                  >
+                </h3>
+                <div
+                  class="item-list clearfix"
+                  :style="{ display: currentIndex == index ? 'block' : 'none' }"
+                >
+                  <div class="subitem" v-for="c2 in c1.categoryChild" :key="c2.categoryId">
+                    <dl class="fore">
+                      <dt>
+                        <a :data-categoryName="c2.categoryName" :data-category2Id="c2.categoryId">
+                          {{ c2.categoryName }}</a
+                        >
+                      </dt>
+                      <dd>
+                        <em v-for="c3 in c2.categoryChild" :key="c3.categoryId">
+                          <a :data-categoryName="c3.categoryName" :data-category3Id="c3.categoryId">
+                            {{ c3.categoryName }}</a
+                          >
+                        </em>
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </transition>
+      </div>
+
       <nav class="nav">
         <a href="###">服装城</a>
         <a href="###">美妆馆</a>
@@ -12,45 +56,6 @@
         <a href="###">有趣</a>
         <a href="###">秒杀</a>
       </nav>
-      <div class="sort">
-        <div class="all-sort-list2" @click="goSearch">
-          <div
-            class="item"
-            v-for="(c1, index) in categoryList"
-            :key="c1.categoryId"
-            @mouseenter="changeIndex(index)"
-            @mouseleave="leaveIndex"
-            :style="{ background: currentIndex == index ? 'skyblue' : '' }"
-          >
-            <h3>
-              <a :data-categoryName="c1.categoryName" :data-category1Id="c1.categoryId">
-                {{ c1.categoryName }}</a
-              >
-            </h3>
-            <div
-              class="item-list clearfix"
-              :style="{ display: currentIndex == index ? 'block' : 'none' }"
-            >
-              <div class="subitem" v-for="c2 in c1.categoryChild" :key="c2.categoryId">
-                <dl class="fore">
-                  <dt>
-                    <a :data-categoryName="c2.categoryName" :data-category2Id="c2.categoryId">
-                      {{ c2.categoryName }}</a
-                    >
-                  </dt>
-                  <dd>
-                    <em v-for="c3 in c2.categoryChild" :key="c3.categoryId">
-                      <a :data-categoryName="c3.categoryName" :data-category3Id="c3.categoryId">
-                        {{ c3.categoryName }}</a
-                      >
-                    </em>
-                  </dd>
-                </dl>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -64,6 +69,7 @@ export default {
   // 组件状态值
   data() {
     return {
+      productListShow: true,
       currentIndex: -1,
     }
   },
@@ -75,33 +81,55 @@ export default {
   },
   // 组件方法
   methods: {
-    // 鼠标进入事件  节流方法
+    // 鼠标进入 商品列表事件  节流方法
     changeIndex: throttle(function (index) {
       this.currentIndex = index
     }, 50),
-    // 鼠标移出事件
+    // 鼠标离开 商品列表事件
     leaveIndex() {
       this.currentIndex = -1
     },
     // 跳转页面  利用事件委派
     goSearch(event) {
       let element = event.target
-      let { categoryname, category1id, category2id, category3id } = element.dataset
+      let { categoryname } = element.dataset
       if (categoryname) {
-        this.$router.push({
-          name: "search",
-          query: {
-            categoryName: categoryname,
-            category1Id: category1id,
-            category2Id: category2id,
-            category3Id: category3id,
-          },
-        })
+        let loction = { name: "search" }
+        let query = { categoryName: categoryname }
+        let idObj = {
+          category1Id: "category1id",
+          category2Id: "category2id",
+          category3Id: "category3id",
+        }
+        for (const key in idObj) {
+          if (element.dataset[idObj[key]]) {
+            query[key] = element.dataset[idObj[key]]
+          }
+        }
+        loction.query = query
+        loction.params = this.$route.params
+
+        // 路由跳转
+        this.$router.push(loction)
+      }
+    },
+
+    // 鼠标进入 全部商品分类 显示商品列表
+    enterShow() {
+      this.productListShow = true
+    },
+    // 鼠标离开 全部商品分类 隐藏商品列表
+    leaveShow() {
+      this.currentIndex = -1
+      if (this.$route.path != "/home") {
+        this.productListShow = false
       }
     },
   },
   mounted() {
-    this.$store.dispatch("home/categoryList")
+    if (this.$route.path != "/home") {
+      this.productListShow = false
+    }
   },
   created() {},
 }
@@ -146,7 +174,7 @@ export default {
       position: absolute;
       background: #fafafa;
       z-index: 999;
-
+      // overflow: auto;
       .all-sort-list2 {
         .item {
           h3 {
@@ -159,6 +187,7 @@ export default {
 
             a {
               color: #333;
+              cursor: pointer;
             }
           }
 
@@ -217,6 +246,29 @@ export default {
           }
         }
       }
+    }
+
+    // 过度动画的样式
+    // 过度动画开始状态 (进入,离开)
+    .sort-enter,
+    .sort-leave-to {
+      height: 20px;
+      background: #e1251b;
+    }
+    // 过度动画结束状态 (进入,离开)
+    .sort-enter-to,
+    .sort-leave {
+      height: 461px;
+      background: #fafafa;
+    }
+    // 定义动画时间、速率 (进入)
+    .sort-enter-active,
+    .sort-leave-active {
+      transition: all 0.5s linear;
+    }
+    // 定义动画时间、速率 (离开)
+    .sort-leave-active {
+      transition: all 0.1s linear;
     }
   }
 }

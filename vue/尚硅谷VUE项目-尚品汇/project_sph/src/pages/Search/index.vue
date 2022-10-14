@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>params--- {{ this.$route.params.keyword }}</h1>
-    <h1>query-- {{ this.$route.query.k }}</h1>
+    <!-- 商品分类导航 -->
+    <TypeNav></TypeNav>
   </div>
 </template>
 
@@ -15,7 +15,7 @@ export default {
   },
   // 组件方法
   methods: {},
-  created() {},
+  mounted() {},
 }
 </script>
 <style lang="less" scoped></style>

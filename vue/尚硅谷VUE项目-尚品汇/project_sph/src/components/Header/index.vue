@@ -56,12 +56,12 @@ export default {
   },
   methods: {
     goSearch() {
-      // this.$router.push({ path: "/search", query: { keyword: this.keyword } })
-      this.$router.push({
+      let loction = {
         name: "search",
         params: { keyword: this.keyword || undefined },
-        query: { k: this.keyword },
-      })
+      }
+      loction.query = this.$route.query
+      this.$router.push(loction)
     },
   },
 }
