@@ -15,11 +15,12 @@
     <!-- 猜你喜欢 -->
     <Like></Like>
 
-    <Floor></Floor>
-    <Floor></Floor>
+    <Floor v-for="item in floorList" :key="item.id" :floorObj="item"></Floor>
 
     <!-- 商标 -->
     <Brand></Brand>
+
+    <button class="backToTop" @click="backToTop">回到顶部</button>
   </div>
 </template>
 
@@ -30,6 +31,7 @@ import Rank from "./Rank"
 import Like from "./Like"
 import Floor from "./Floor"
 import Brand from "./Brand"
+import { mapState } from "vuex"
 export default {
   // 组件名称
   name: "Home",
@@ -38,9 +40,28 @@ export default {
   data() {
     return {}
   },
+  computed: {
+    ...mapState("home", ["floorList"]),
+  },
   // 组件方法
-  methods: {},
+  methods: {
+    backToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      })
+    },
+  },
+  mounted() {
+    this.$store.dispatch("home/getFloorList")
+  },
   created() {},
 }
 </script>
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.backToTop {
+  position: fixed;
+  right: 80px;
+  bottom: 80px;
+}
+</style>

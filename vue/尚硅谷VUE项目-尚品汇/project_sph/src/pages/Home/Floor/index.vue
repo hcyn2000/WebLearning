@@ -96,6 +96,12 @@
 export default {
   // 组件名称
   name: "Floor",
+  props: {
+    floorObj: {
+      type: Object,
+      default: () => {},
+    },
+  },
   // 组件状态值
   data() {
     return {}
