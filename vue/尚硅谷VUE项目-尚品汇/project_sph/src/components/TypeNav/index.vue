@@ -264,11 +264,11 @@ export default {
     // 定义动画时间、速率 (进入)
     .sort-enter-active,
     .sort-leave-active {
-      transition: all 0.5s linear;
+      transition: all 0.2s linear;
     }
     // 定义动画时间、速率 (离开)
     .sort-leave-active {
-      transition: all 0.1s linear;
+      transition: all 0.2s linear;
     }
   }
 }
