@@ -176,6 +176,15 @@ export default {
       z-index: 999;
       // overflow: auto;
       .all-sort-list2 {
+        overflow: auto;
+        height: 100%;
+        &::-webkit-scrollbar {
+          width: 0;
+        }
+        a {
+          color: #333;
+          cursor: pointer;
+        }
         .item {
           h3 {
             line-height: 30px;
@@ -184,11 +193,6 @@ export default {
             overflow: hidden;
             padding: 0 20px;
             margin: 0;
-
-            a {
-              color: #333;
-              cursor: pointer;
-            }
           }
 
           .item-list {

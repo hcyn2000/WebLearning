@@ -6,7 +6,7 @@ export default {
     return requests({
       url: "/list",
       method: "post",
-      params: params,
+      data: params,
     })
   },
 }
