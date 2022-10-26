@@ -44,14 +44,14 @@ export default {
   methods: {
     searchBrand(item) {
       this.$parent.searchParams.trademark = `${item.tmId}:${item.tmName}`;
-      Object.assign(this.$parent.searchParams, this.$route.params, this.$route.query);
+      this.$parent.mergeUrl();
       this.$parent.getData();
     },
     searchAttribute(attr, attrValue) {
       let data = `${attr.attrId}:${attrValue}:${attr.attrName}`;
       if (this.$parent.searchParams.props.indexOf(data) == -1)
         this.$parent.searchParams.props.push(data);
-      Object.assign(this.$parent.searchParams, this.$route.params, this.$route.query);
+      this.$parent.mergeUrl();
       this.$parent.getData();
     },
   },

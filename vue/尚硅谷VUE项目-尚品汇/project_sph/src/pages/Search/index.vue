@@ -39,24 +39,25 @@
           <div class="sui-navbar">
             <div class="navbar-inner filter">
               <ul class="sui-nav">
-                <li class="active">
-                  <a href="#">综合</a>
+                <li
+                  :class="{ active: checkOrderIndex == index }"
+                  v-for="(item, index) in orderList"
+                  :key="item.value"
+                  @click="checkItem(item, index)"
+                >
+                  <a>
+                    {{ item.name }}
+                    <span v-show="checkOrderIndex == index">
+                      {{ sort == "asc" ? "⬆" : "⬇" }}
+                    </span>
+                  </a>
                 </li>
-                <li>
-                  <a href="#">销量</a>
-                </li>
-                <li>
-                  <a href="#">新品</a>
-                </li>
-                <li>
-                  <a href="#">评价</a>
-                </li>
-                <li>
+                <!-- <li>
                   <a href="#">价格⬆</a>
                 </li>
                 <li>
                   <a href="#">价格⬇</a>
-                </li>
+                </li> -->
               </ul>
             </div>
           </div>
@@ -96,29 +97,24 @@
             <div class="sui-pagination clearfix">
               <ul>
                 <li class="prev disabled">
-                  <a href="#">«上一页</a>
+                  <a>«上一页</a>
                 </li>
-                <li class="active">
-                  <a href="#">1</a>
+                <li
+                  :class="{ active: checkPageNoIndex == index }"
+                  v-for="(item, index) in searchObj.totalPages"
+                  :key="index"
+                >
+                  <a>{{ item }}</a>
                 </li>
-                <li>
-                  <a href="#">2</a>
-                </li>
-                <li>
-                  <a href="#">3</a>
-                </li>
-                <li>
-                  <a href="#">4</a>
-                </li>
-                <li>
-                  <a href="#">5</a>
-                </li>
-                <li class="dotted"><span>...</span></li>
+
+                <!-- <li class="dotted"><span>...</span></li> -->
                 <li class="next">
-                  <a href="#">下一页»</a>
+                  <a>下一页»</a>
                 </li>
               </ul>
-              <div><span>共10页&nbsp;</span></div>
+              <div>
+                <span>共{{ searchObj.totalPages }}页&nbsp;</span>
+              </div>
             </div>
           </div>
         </div>
@@ -144,19 +140,28 @@ export default {
         category3Id: "",
         categoryName: "", // 分类的名称
         keyword: "", // 关键词
-        order: "", // 排序
+        order: "1:desc", // 排序
         pageNo: 1,
         pageSize: 10,
         props: [], // 属性
         trademark: "", // 品牌
       },
       resultList: [],
+
+      orderList: [
+        { name: "综合", value: "1" },
+        { name: "价格", value: "2" },
+      ],
+      checkOrderIndex: 0,
+      sort: "desc",
+
+      checkPageNoIndex: 0,
     };
   },
   watch: {
     $route: {
       handler(newVal) {
-        Object.assign(this.searchParams, this.$route.params, this.$route.query);
+        this.mergeUrl();
         this.getData();
         this.resultListFun();
 
@@ -171,6 +176,10 @@ export default {
     ...mapGetters("search", ["goodsList"]),
   },
   methods: {
+    // 合并url的数据
+    mergeUrl() {
+      Object.assign(this.searchParams, this.$route.params, this.$route.query);
+    },
     // 清空三级联动数据数据
     wipeData() {
       let idList = ["category1Id", "category2Id", "category3Id", "categoryName"];
@@ -219,6 +228,20 @@ export default {
       }
 
       this.$router.push(loction);
+    },
+
+    // 排序
+    checkItem(item, index) {
+      if (this.checkOrderIndex == index) {
+        this.sort = this.sort == "asc" ? "desc" : "asc";
+      } else {
+        this.sort = "desc";
+      }
+      this.checkOrderIndex = index;
+
+      this.searchParams.order = `${item.value}:${this.sort}`;
+      this.mergeUrl();
+      this.getData();
     },
   },
   mounted() {
@@ -334,6 +357,10 @@ export default {
                 padding: 11px 15px;
                 color: #777;
                 text-decoration: none;
+                span {
+                  font-size: 20px;
+                  line-height: 1;
+                }
               }
 
               &.active {
@@ -471,20 +498,18 @@ export default {
       }
 
       .page {
-        width: 733px;
         height: 66px;
         overflow: hidden;
-        float: right;
 
         .sui-pagination {
           margin: 18px 0;
-
+          display: flex;
+          align-items: center;
+          justify-content: center;
           ul {
             margin-left: 0;
             margin-bottom: 0;
             vertical-align: middle;
-            width: 490px;
-            float: left;
 
             li {
               line-height: 18px;
@@ -549,10 +574,9 @@ export default {
           }
 
           div {
+            margin-left: 20px;
             color: #333;
             font-size: 14px;
-            float: right;
-            width: 241px;
           }
         }
       }
