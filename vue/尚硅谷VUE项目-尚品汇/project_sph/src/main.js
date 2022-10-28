@@ -1,25 +1,17 @@
-import Vue from "vue"
-import App from "./App.vue"
-import router from "./router" // 引入路由
-import store from "./store" // 引入vuex
+import Vue from "vue";
+import App from "./App.vue";
+import router from "./router"; // 引入路由
+import store from "./store"; // 引入vuex
 
-import "@/mock/moclServe" // 引入mock数据
-import "swiper/css/swiper.css" // 引入swiper样式
+import "@/mock/moclServe"; // 引入mock数据
+import "swiper/css/swiper.css"; // 引入swiper样式
 
-// 注册三级联动--全局组件
-import TypeNav from "@/components/TypeNav"
-// 第一个参数：全局组件的名称  第二个参数：引入的组件
-Vue.component(TypeNav.name, TypeNav)
+import "@/utils/globalComponents"; // 引入全局组件
 
-// 注册轮播图--全局组件
-import Carousel from "@/components/Carousel"
-// 第一个参数：全局组件的名称  第二个参数：引入的组件
-Vue.component(Carousel.name, Carousel)
-
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 new Vue({
   router,
   store,
   render: (h) => h(App),
-}).$mount("#app")
+}).$mount("#app");
