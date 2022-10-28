@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import Swiper from "swiper"
+import Swiper from "swiper";
 export default {
   // 组件名称
   name: "Carousel",
@@ -27,7 +27,7 @@ export default {
   },
   // 组件状态值
   data() {
-    return {}
+    return {};
   },
   watch: {
     imgList: {
@@ -36,8 +36,8 @@ export default {
       handler(newVal) {
         if (newVal.length) {
           this.$nextTick(() => {
-            this.getSwiper()
-          })
+            this.getSwiper();
+          });
         }
       },
     },
@@ -60,10 +60,10 @@ export default {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev",
         },
-      })
+      });
     },
   },
   mounted() {},
-}
+};
 </script>
 <style lang="less" scoped></style>

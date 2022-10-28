@@ -21,7 +21,7 @@
               <img :src="floorObj.imgUrl" />
             </div>
             <div class="floorBanner">
-              <Carousel :imgList="floorObj.carouselList"></Carousel>
+              <Carousel :imgList="carouselList"></Carousel>
             </div>
             <div class="split">
               <span class="floor-x-line"></span>
@@ -62,21 +62,34 @@ export default {
 
   // 组件状态值
   data() {
-    return {}
+    return {
+      carouselList: [],
+    };
+  },
+  watch: {
+    floorObj: {
+      deep: true,
+      handler(newVal) {
+        this.$nextTick(() => {
+          this.carouselList = newVal.carouselList;
+        });
+      },
+      immediate: true,
+    },
   },
   computed: {
     recommendListLeft() {
-      return this.floorObj.recommendList.slice(0, 2)
+      return this.floorObj.recommendList.slice(0, 2);
     },
     recommendListRight() {
-      return this.floorObj.recommendList.slice(-2)
+      return this.floorObj.recommendList.slice(-2);
     },
   },
   // 组件方法
   methods: {},
   mounted() {},
   created() {},
-}
+};
 </script>
 <style lang="less" scoped>
 .floor {

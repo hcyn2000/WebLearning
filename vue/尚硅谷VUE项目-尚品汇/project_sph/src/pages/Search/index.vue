@@ -43,7 +43,7 @@
                   :class="{ active: checkOrderIndex == index }"
                   v-for="(item, index) in orderList"
                   :key="item.value"
-                  @click="checkItem(item, index)"
+                  @click="checkOrderItem(item, index)"
                 >
                   <a>
                     {{ item.name }}
@@ -52,12 +52,6 @@
                     </span>
                   </a>
                 </li>
-                <!-- <li>
-                  <a href="#">价格⬆</a>
-                </li>
-                <li>
-                  <a href="#">价格⬇</a>
-                </li> -->
               </ul>
             </div>
           </div>
@@ -93,30 +87,13 @@
               </li>
             </ul>
           </div>
-          <div class="fr page">
-            <div class="sui-pagination clearfix">
-              <ul>
-                <li class="prev disabled">
-                  <a>«上一页</a>
-                </li>
-                <li
-                  :class="{ active: checkPageNoIndex == index }"
-                  v-for="(item, index) in searchObj.totalPages"
-                  :key="index"
-                >
-                  <a>{{ item }}</a>
-                </li>
-
-                <!-- <li class="dotted"><span>...</span></li> -->
-                <li class="next">
-                  <a>下一页»</a>
-                </li>
-              </ul>
-              <div>
-                <span>共{{ searchObj.totalPages }}页&nbsp;</span>
-              </div>
-            </div>
-          </div>
+          <Pageination
+            :page-size="searchParams.pageSize"
+            :current-page="searchParams.pageNo"
+            :total="searchObj.total"
+            @sizeChange="pageChange"
+            @pageChange="pageChange"
+          ></Pageination>
         </div>
       </div>
     </div>
@@ -128,7 +105,6 @@ import { mapState, mapGetters } from "vuex";
 import SearchSelector from "./SearchSelector/SearchSelector";
 export default {
   name: "Search",
-
   components: {
     SearchSelector,
   },
@@ -147,15 +123,15 @@ export default {
         trademark: "", // 品牌
       },
       resultList: [],
-
+      // 排序相关
       orderList: [
         { name: "综合", value: "1" },
         { name: "价格", value: "2" },
       ],
       checkOrderIndex: 0,
       sort: "desc",
-
-      checkPageNoIndex: 0,
+      // 分页器相关
+      checkPageNoIndex: 1,
     };
   },
   watch: {
@@ -231,7 +207,7 @@ export default {
     },
 
     // 排序
-    checkItem(item, index) {
+    checkOrderItem(item, index) {
       if (this.checkOrderIndex == index) {
         this.sort = this.sort == "asc" ? "desc" : "asc";
       } else {
@@ -241,6 +217,11 @@ export default {
 
       this.searchParams.order = `${item.value}:${this.sort}`;
       this.mergeUrl();
+      this.getData();
+    },
+    // 分页器
+    pageChange(pageNo) {
+      this.searchParams.pageNo = pageNo;
       this.getData();
     },
   },
@@ -493,90 +474,6 @@ export default {
                 }
               }
             }
-          }
-        }
-      }
-
-      .page {
-        height: 66px;
-        overflow: hidden;
-
-        .sui-pagination {
-          margin: 18px 0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          ul {
-            margin-left: 0;
-            margin-bottom: 0;
-            vertical-align: middle;
-
-            li {
-              line-height: 18px;
-              display: inline-block;
-
-              a {
-                position: relative;
-                float: left;
-                line-height: 18px;
-                text-decoration: none;
-                background-color: #fff;
-                border: 1px solid #e0e9ee;
-                margin-left: -1px;
-                font-size: 14px;
-                padding: 9px 18px;
-                color: #333;
-              }
-
-              &.active {
-                a {
-                  background-color: #fff;
-                  color: #e1251b;
-                  border-color: #fff;
-                  cursor: default;
-                }
-              }
-
-              &.prev {
-                a {
-                  background-color: #fafafa;
-                }
-              }
-
-              &.disabled {
-                a {
-                  color: #999;
-                  cursor: default;
-                }
-              }
-
-              &.dotted {
-                span {
-                  margin-left: -1px;
-                  position: relative;
-                  float: left;
-                  line-height: 18px;
-                  text-decoration: none;
-                  background-color: #fff;
-                  font-size: 14px;
-                  border: 0;
-                  padding: 9px 18px;
-                  color: #333;
-                }
-              }
-
-              &.next {
-                a {
-                  background-color: #fafafa;
-                }
-              }
-            }
-          }
-
-          div {
-            margin-left: 20px;
-            color: #333;
-            font-size: 14px;
           }
         }
       }
