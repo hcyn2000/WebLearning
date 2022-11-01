@@ -91,6 +91,7 @@
             :page-size="searchParams.pageSize"
             :current-page="searchParams.pageNo"
             :total="searchObj.total"
+            :pagerCount="5"
             @sizeChange="pageChange"
             @pageChange="pageChange"
           ></Pageination>
@@ -118,7 +119,7 @@ export default {
         keyword: "", // 关键词
         order: "1:desc", // 排序
         pageNo: 1,
-        pageSize: 10,
+        pageSize: 4,
         props: [], // 属性
         trademark: "", // 品牌
       },
