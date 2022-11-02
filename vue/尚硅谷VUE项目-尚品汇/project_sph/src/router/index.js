@@ -1,10 +1,12 @@
-import Vue from "vue"
-import VueRouter from "vue-router"
-Vue.use(VueRouter)
+import Vue from "vue";
+import VueRouter from "vue-router";
+Vue.use(VueRouter);
+
+import routes from "./routes";
 
 // 先把VueRouter原型对象的push，先保存一份
-let originPush = VueRouter.prototype.push
-let originReplace = VueRouter.prototype.replace
+let originPush = VueRouter.prototype.push;
+let originReplace = VueRouter.prototype.replace;
 
 // 重写 push|replace
 // 第一个参数：告诉原来的push方法，你往哪里跳转（传递哪些参数）
@@ -17,60 +19,35 @@ let originReplace = VueRouter.prototype.replace
 
 VueRouter.prototype.push = function (location, resolve, reject) {
   if (resolve && reject) {
-    originPush.call(this, location, resolve, reject)
+    originPush.call(this, location, resolve, reject);
   } else {
     originPush.call(
       this,
       location,
       () => {},
       () => {}
-    )
+    );
   }
-}
+};
 
 VueRouter.prototype.replace = function (location, resolve, reject) {
   if (resolve && reject) {
-    originReplace.call(this, location, resolve, reject)
+    originReplace.call(this, location, resolve, reject);
   } else {
     originReplace.call(
       this,
       location,
       () => {},
       () => {}
-    )
+    );
   }
-}
+};
 
 const router = new VueRouter({
-  routes: [
-    {
-      path: "/home",
-      meta: {
-        isFooter: true,
-      },
-      component: () => import("@/pages/Home"),
-    },
-    {
-      name: "search",
-      path: "/search/:keyword?", // params参数后面加 ? 就可以可传可不传
-      meta: {
-        isFooter: true,
-      },
-      component: () => import("@/pages/Search"),
-    },
-    {
-      path: "/login",
-      component: () => import("@/pages/Login"),
-    },
-    {
-      path: "/register",
-      component: () => import("@/pages/Register"),
-    },
-    {
-      path: "/",
-      redirect: "/home",
-    },
-  ],
-})
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    return { y: 0 }; // 代表滚动条在最上方
+  },
+});
 
-export default router
+export default router;
