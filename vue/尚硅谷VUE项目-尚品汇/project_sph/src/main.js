@@ -11,6 +11,10 @@ import "@/utils/globalComponents"; // 引入全局组件
 Vue.config.productionTip = false;
 
 new Vue({
+  beforeCreate() {
+    //配置全局事件总线
+    Vue.prototype.$bus = this;
+  },
   router,
   store,
   render: (h) => h(App),
