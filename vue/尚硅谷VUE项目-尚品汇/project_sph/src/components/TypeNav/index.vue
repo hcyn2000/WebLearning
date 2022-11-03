@@ -61,17 +61,17 @@
 </template>
 
 <script>
-import { mapState } from "vuex"
-import { throttle } from "lodash"
+import { mapState } from "vuex";
+import { throttle } from "lodash";
 export default {
   // 组件名称
   name: "TypeNav",
   // 组件状态值
   data() {
     return {
-      productListShow: true,
+      productListShow: false,
       currentIndex: -1,
-    }
+    };
   },
   computed: {
     ...mapState({
@@ -83,56 +83,56 @@ export default {
   methods: {
     // 鼠标进入 商品列表事件  节流方法
     changeIndex: throttle(function (index) {
-      this.currentIndex = index
+      this.currentIndex = index;
     }, 50),
     // 鼠标离开 商品列表事件
     leaveIndex() {
-      this.currentIndex = -1
+      this.currentIndex = -1;
     },
     // 跳转页面  利用事件委派
     goSearch(event) {
-      let element = event.target
-      let { categoryname } = element.dataset
+      let element = event.target;
+      let { categoryname } = element.dataset;
       if (categoryname) {
-        let loction = { name: "search" }
-        let query = { categoryName: categoryname }
+        let loction = { name: "search" };
+        let query = { categoryName: categoryname };
         let idObj = {
           category1Id: "category1id",
           category2Id: "category2id",
           category3Id: "category3id",
-        }
+        };
         for (const key in idObj) {
           if (element.dataset[idObj[key]]) {
-            query[key] = element.dataset[idObj[key]]
+            query[key] = element.dataset[idObj[key]];
           }
         }
-        loction.query = query
-        loction.params = this.$route.params
+        loction.query = query;
+        loction.params = this.$route.params;
 
         // 路由跳转
-        this.$router.push(loction)
+        this.$router.push(loction);
       }
     },
 
     // 鼠标进入 全部商品分类 显示商品列表
     enterShow() {
-      this.productListShow = true
+      this.productListShow = true;
     },
     // 鼠标离开 全部商品分类 隐藏商品列表
     leaveShow() {
-      this.currentIndex = -1
+      this.currentIndex = -1;
       if (this.$route.path != "/home") {
-        this.productListShow = false
+        this.productListShow = false;
       }
     },
   },
   mounted() {
-    if (this.$route.path != "/home") {
-      this.productListShow = false
+    if (this.$route.path == "/home") {
+      this.productListShow = true;
     }
   },
   created() {},
-}
+};
 </script>
 <style lang="less" scoped>
 .type-nav {

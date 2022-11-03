@@ -8,14 +8,14 @@
         </li>
         <!-- 第一页 -->
         <li
-          v-show="this.totalPages >= this.pagerCount + 2"
+          v-show="this.numberList[0] > 1"
           :class="{ active: currentPage == 1 }"
           @click="checkPageNoItem(1)"
         >
           <a>1</a>
         </li>
         <!-- 前面省略号 -->
-        <li class="dotted" v-show="this.numberList[0] > 2 && this.totalPages > this.pagerCount + 2">
+        <li class="dotted" v-show="this.numberList[0] > 2">
           <span>...</span>
         </li>
         <!-- 中间部分 -->
@@ -28,18 +28,12 @@
           <a>{{ item }}</a>
         </li>
         <!-- 后面省略号 -->
-        <li
-          class="dotted"
-          v-show="
-            this.numberList[this.numberList.length - 1] < totalPages - 1 &&
-            this.totalPages > this.pagerCount + 2
-          "
-        >
+        <li class="dotted" v-show="this.numberList[this.numberList.length - 1] < totalPages - 1">
           <span>...</span>
         </li>
         <!-- 最后一页 -->
         <li
-          v-show="this.totalPages >= this.pagerCount + 2"
+          v-show="this.numberList[this.numberList.length - 1] < totalPages"
           :class="{ active: currentPage == totalPages }"
           @click="checkPageNoItem(totalPages)"
         >
@@ -87,26 +81,26 @@ export default {
       return Math.ceil(this.total / this.pageSize);
     },
     numberList() {
+      let { totalPages, pagerCount, checkPageNoIndex } = this;
       let list = [];
       let start = 0,
         end = 0;
-      // 总条数小于中间页数加前后两位页数
-      if (this.totalPages < this.pagerCount + 2) {
+      // 总条数小于中间页数
+      if (pagerCount > totalPages) {
         start = 1;
-        end = this.totalPages;
+        end = totalPages;
       } else {
-        start = this.checkPageNoIndex - parseInt(this.pagerCount / 2);
-        end = this.checkPageNoIndex + parseInt(this.pagerCount / 2);
-        console.log(start, end);
-        // 当前页小于或等于中间页数加1除于2加1  5-4 7-5
-        if (this.checkPageNoIndex <= (this.pagerCount + 1) / 2 + 1) {
-          start = 2;
-          end = this.pagerCount + 1;
+        start = checkPageNoIndex - parseInt(pagerCount / 2);
+        end = checkPageNoIndex + parseInt(pagerCount / 2);
+        // start 小于 1
+        if (start < 1) {
+          start = 1;
+          end = pagerCount;
         }
-        // 当前页大于或等于最后一页减中间页数除于2加1
-        else if (this.checkPageNoIndex >= this.totalPages - (parseInt(this.pagerCount / 2) + 1)) {
-          start = this.totalPages - this.pagerCount;
-          end = this.totalPages - 1;
+        // end 大于 总页数
+        else if (end > totalPages) {
+          start = totalPages - pagerCount + 1;
+          end = totalPages;
         }
       }
 
