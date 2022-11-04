@@ -59,7 +59,7 @@ export default {
     },
     changeCurrentIndex(index, item) {
       this.currentIndex = index;
-      this.$parent.$refs.zoom.imgUrl = item.imgUrl;
+      this.$parent.$refs.zoom.currentIndex = index;
     },
   },
 };

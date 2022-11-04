@@ -1,11 +1,11 @@
 <template>
   <div class="spec-preview">
-    <img :src="imgUrl || skuImageUrl" />
-    <div class="event"></div>
+    <img :src="skuImageUrl" />
+    <div class="event" @mousemove="handler"></div>
     <div class="big">
-      <img :src="imgUrl || skuImageUrl" />
+      <img :src="skuImageUrl" ref="big" />
     </div>
-    <div class="mask"></div>
+    <div class="mask" ref="mask"></div>
   </div>
 </template>
 
@@ -22,12 +22,31 @@ export default {
   },
   data() {
     return {
-      imgUrl: "",
+      currentIndex: 0,
     };
   },
   computed: {
     skuImageUrl() {
-      return this.skuImageList.length && this.skuImageList[0].imgUrl;
+      return this.skuImageList.length && this.skuImageList[this.currentIndex].imgUrl;
+    },
+  },
+  methods: {
+    handler(e) {
+      let mask = this.$refs.mask;
+      let big = this.$refs.big;
+
+      let left = e.offsetX - mask.offsetWidth / 2;
+      let top = e.offsetY - mask.offsetHeight / 2;
+
+      if (left <= 0) left = 0;
+      if (left >= mask.offsetWidth) left = mask.offsetWidth;
+      if (top <= 0) top = 0;
+      if (top >= mask.offsetHeight) top = mask.offsetHeight;
+
+      mask.style.left = left + "px";
+      mask.style.top = top + "px";
+      big.style.left = left * -2 + "px";
+      big.style.top = top * -2 + "px";
     },
   },
 };
