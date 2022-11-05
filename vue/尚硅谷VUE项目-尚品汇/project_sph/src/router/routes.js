@@ -1,5 +1,6 @@
 export default [
   {
+    // 首页
     path: "/home",
     meta: {
       isFooter: true,
@@ -7,6 +8,7 @@ export default [
     component: () => import("@/pages/Home"),
   },
   {
+    // 查询商品结果页面
     name: "search",
     path: "/search/:keyword?", // params参数后面加 ? 就可以可传可不传
     meta: {
@@ -15,9 +17,19 @@ export default [
     component: () => import("@/pages/Search"),
   },
   {
+    // 商品详情页面
     name: "detail",
     path: "/detail/:id?",
     component: () => import("@/pages/Detail"),
+    meta: {
+      isFooter: true,
+    },
+  },
+  // 添加到购物车跳转页面
+  {
+    name: "addCartSuccess",
+    path: "/addCartsuccess",
+    component: () => import("@/pages/AddCartSuccess"),
     meta: {
       isFooter: true,
     },

@@ -7,9 +7,15 @@ const state = {
 
 // actions：用于响应组件中的动作,处理异步操作
 const actions = {
+  // 获取商品详情
   async getGoodsInfo({ commit }, value) {
     let data = await detail_api.getGoodsInfo(value);
     commit("GETGOODSINFO", data);
+  },
+  // 添加到购物车
+  async getAddToCart({ commit }, { skuId, skuNum }) {
+    await detail_api.getAddToCart(skuId, skuNum);
+    return "ok";
   },
 };
 
