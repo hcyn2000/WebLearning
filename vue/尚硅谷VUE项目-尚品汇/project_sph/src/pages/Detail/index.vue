@@ -372,7 +372,28 @@ export default {
         skuId: this.skuInfo.id,
         skuNum: this.skuNum,
       });
-      this.$router.push({ name: "addCartSuccess" });
+      let saleAttrList = [];
+      this.spuSaleAttrList.forEach((item) => {
+        for (let i = 0; i < item.spuSaleAttrValueList.length; i++) {
+          if (item.spuSaleAttrValueList[i].isChecked == 1) {
+            let { saleAttrName, saleAttrValueName } = item.spuSaleAttrValueList[i];
+            saleAttrList.push({
+              saleAttrName,
+              saleAttrValueName,
+            });
+          }
+        }
+      });
+
+      let { skuDefaultImg, skuName, price } = this.skuInfo;
+      let data = {
+        skuDefaultImg,
+        skuName,
+        price,
+        saleAttrList,
+      };
+      window.sessionStorage.setItem("skuInfo", JSON.stringify(data));
+      this.$router.push({ name: "addCartSuccess", query: { skuNum: this.skuNum } });
     },
   },
   mounted() {
