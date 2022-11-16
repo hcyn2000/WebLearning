@@ -13,7 +13,7 @@
         </div>
         <div class="typeList">
           <a href="###">我的订单</a>
-          <a href="###">我的购物车</a>
+          <router-link to="/shopCart">我的购物车</router-link>
           <a href="###">我的尚品汇</a>
           <a href="###">尚品汇会员</a>
           <a href="###">企业采购</a>
@@ -52,19 +52,19 @@ export default {
   data() {
     return {
       keyword: "",
-    }
+    };
   },
   methods: {
     goSearch() {
       let loction = {
         name: "search",
         params: { keyword: this.keyword || undefined },
-      }
-      loction.query = this.$route.query
-      this.$router.push(loction)
+      };
+      loction.query = this.$route.query;
+      this.$router.push(loction);
     },
   },
-}
+};
 </script>
 
 <style scoped lang="less">

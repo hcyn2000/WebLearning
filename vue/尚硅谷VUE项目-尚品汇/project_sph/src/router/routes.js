@@ -34,6 +34,15 @@ export default [
       isFooter: true,
     },
   },
+  // 购物车页面
+  {
+    name: "shopCart",
+    path: "/shopCart",
+    component: () => import("@/pages/ShopCart"),
+    meta: {
+      isFooter: true,
+    },
+  },
   {
     path: "/login",
     component: () => import("@/pages/Login"),

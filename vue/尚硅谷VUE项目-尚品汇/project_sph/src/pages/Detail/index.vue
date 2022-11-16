@@ -381,12 +381,14 @@ export default {
               saleAttrName,
               saleAttrValueName,
             });
+            break;
           }
         }
       });
 
-      let { skuDefaultImg, skuName, price } = this.skuInfo;
+      let { skuDefaultImg, skuName, price, id } = this.skuInfo;
       let data = {
+        id,
         skuDefaultImg,
         skuName,
         price,

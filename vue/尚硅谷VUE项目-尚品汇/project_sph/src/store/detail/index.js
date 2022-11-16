@@ -1,8 +1,9 @@
 import detail_api from "@/api/detail";
-
+import { getUUID } from "@/utils/uuid_token"; // 封装游客身份模块
 // state：仓库存储数据的地方
 const state = {
   goodInfo: {},
+  uuid_token: getUUID(),
 };
 
 // actions：用于响应组件中的动作,处理异步操作
