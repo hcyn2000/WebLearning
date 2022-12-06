@@ -106,7 +106,16 @@ export default {
     // 点击是否全选
     isAllClick() {
       this.cartInfoList.forEach((item) => {
-        item.isChecked = item.isChecked ? 0 : 1;
+        this.updateCheckCart(item);
+        // item.isChecked = item.isChecked ? 0 : 1;
+      });
+    },
+    // 切换购物车商品选中状态
+    updateCheckCart(item) {
+      item.isChecked = item.isChecked ? 0 : 1;
+      this.$store.dispatch("shopCart/getCheckCart", {
+        skuID: item.skuId,
+        isChecked: item.isChecked,
       });
     },
     // 点击数量按钮 修改某一个产品的数量  用了节流方法
@@ -135,14 +144,7 @@ export default {
       await this.$store.dispatch("shopCart/getDeleteCart", skuId);
       this.getData();
     },
-    // 切换购物车商品选中状态
-    updateCheckCart(item) {
-      item.isChecked = item.isChecked ? 0 : 1;
-      this.$store.dispatch("shopCart/getCheckCart", {
-        skuID: item.skuId,
-        isChecked: item.isChecked,
-      });
-    },
+
     // 删除选中的商品
     async deleteAllCheckedCart() {
       if (!confirm("确定要删除选中商品吗？")) return;
