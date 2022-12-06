@@ -1,17 +1,17 @@
-<input type="text" name="" id="inp">
+<input type="text" name="" id="inp" />
 <script>
   function fangDou(fn) {
-    let timeout = null
+    let timeout = null;
     return function () {
-      clearTimeout(timeout)
+      clearTimeout(timeout);
       timeout = setTimeout(() => {
-        fn.apply(this, arguments)
-      }, 500);
-    }
+        fn.apply(this, arguments);
+      }, 2000);
+    };
   }
   function a() {
-    console.log('防抖成功');
+    console.log("防抖成功");
   }
-  let inp = document.getElementById('inp')
-  inp.addEventListener('input', fangDou(a))
+  let inp = document.getElementById("inp");
+  inp.addEventListener("input", fangDou(a));
 </script>
