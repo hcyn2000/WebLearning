@@ -77,7 +77,9 @@
                     <i class="command">已有<span>2000</span>人评价</i>
                   </div>
                   <div class="operate">
-                    <a class="sui-btn btn-bordered btn-danger">加入购物车</a>
+                    <a class="sui-btn btn-bordered btn-danger" @click="addToCart(item)"
+                      >加入购物车</a
+                    >
                     <a href="javascript:void(0);" class="sui-btn btn-bordered">收藏</a>
                   </div>
                 </div>
@@ -221,6 +223,21 @@ export default {
     pageChange(pageNo) {
       this.searchParams.pageNo = pageNo;
       this.getData();
+    },
+    // 单个商品加入购物车
+    addToCart(item) {
+      this.$store.dispatch("detail/getAddToCart", {
+        skuId: item.id,
+        skuNum: 1,
+      });
+      let { id, defaultImg, title } = item;
+      let data = {
+        id,
+        skuDefaultImg: defaultImg,
+        skuName: title,
+      };
+      window.sessionStorage.setItem("skuInfo", JSON.stringify(data));
+      this.$router.push({ name: "addCartSuccess", query: { skuNum: 1 } });
     },
   },
   mounted() {
