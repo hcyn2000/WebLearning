@@ -386,12 +386,11 @@ export default {
         }
       });
 
-      let { skuDefaultImg, skuName, price, id } = this.skuInfo;
+      let { skuDefaultImg, skuName, id } = this.skuInfo;
       let data = {
         id,
         skuDefaultImg,
         skuName,
-        price,
         saleAttrList,
       };
       window.sessionStorage.setItem("skuInfo", JSON.stringify(data));
