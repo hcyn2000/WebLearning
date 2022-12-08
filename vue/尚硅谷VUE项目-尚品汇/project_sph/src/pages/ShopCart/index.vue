@@ -54,9 +54,17 @@
       </div>
     </div>
     <div class="cart-tool">
-      <div class="select-all" @click="isAllClick">
-        <input class="chooseAll" type="checkbox" :checked="isAllCheck" />
-        <span>全选</span>
+      <div class="select-all">
+        <label>
+          <input
+            class="chooseAll"
+            type="checkbox"
+            :disabled="cartInfoList.length == 0"
+            :checked="isAllCheck"
+            @change="isAllClick"
+          />
+          全选
+        </label>
       </div>
       <div class="option">
         <a href="javascript:" @click="deleteAllCheckedCart">删除选中的商品</a>
@@ -104,18 +112,18 @@ export default {
       this.$store.dispatch("shopCart/getCartList");
     },
     // 点击是否全选
-    isAllClick() {
+    isAllClick(event) {
+      let checked = event.target.checked ? 1 : 0;
       this.cartInfoList.forEach((item) => {
-        this.updateCheckCart(item);
-        // item.isChecked = item.isChecked ? 0 : 1;
+        checked != item.isChecked && this.updateCheckCart(item, checked);
       });
     },
     // 切换购物车商品选中状态
-    updateCheckCart(item) {
-      item.isChecked = item.isChecked ? 0 : 1;
+    updateCheckCart(item, checked = item.isChecked ? 0 : 1) {
+      item.isChecked = checked;
       this.$store.dispatch("shopCart/getCheckCart", {
         skuID: item.skuId,
-        isChecked: item.isChecked,
+        isChecked: checked,
       });
     },
     // 点击数量按钮 修改某一个产品的数量  用了节流方法
