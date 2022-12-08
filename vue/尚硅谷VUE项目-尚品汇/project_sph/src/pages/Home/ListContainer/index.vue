@@ -79,13 +79,13 @@
 </template>
 
 <script>
-import { mapState } from "vuex"
+import { mapState } from "vuex";
 export default {
   // 组件名称
   name: "ListContainer",
   // 组件状态值
   data() {
-    return {}
+    return {};
   },
 
   computed: {
@@ -94,9 +94,9 @@ export default {
   // 组件方法
   methods: {},
   mounted() {
-    this.$store.dispatch("home/getBannersList")
+    this.$store.dispatch("home/getBannersList");
   },
-}
+};
 </script>
 <style lang="less" scoped>
 .list-container {
@@ -169,7 +169,7 @@ export default {
           width: 25%;
 
           .list-item {
-            background-image: url(./images/icons.png);
+            background-image: url(../../../assets/images/icons.png);
             width: 61px;
             height: 40px;
             display: block;

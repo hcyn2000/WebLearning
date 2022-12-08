@@ -61,12 +61,12 @@ export default {
   name: "Like",
   // 组件状态值
   data() {
-    return {}
+    return {};
   },
   // 组件方法
   methods: {},
   created() {},
-}
+};
 </script>
 <style lang="less" scoped>
 .like {
@@ -87,7 +87,7 @@ export default {
 
       .fr {
         float: right;
-        background-image: url(./images/icons.png);
+        background-image: url(../../../assets/images/icons.png);
         width: 66px;
         height: 25px;
         background-position: 182px -104px;
