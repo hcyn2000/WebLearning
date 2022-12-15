@@ -12,9 +12,7 @@ import Footer from "@/components/Footer";
 export default {
   name: "app",
   components: { Header, Footer },
-  mounted() {
-    this.$store.dispatch("home/categoryList"); // 获取商品分类三级列表
-  },
+  mounted() {},
 };
 </script>
 

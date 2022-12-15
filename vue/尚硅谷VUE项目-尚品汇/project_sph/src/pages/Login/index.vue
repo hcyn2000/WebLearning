@@ -14,14 +14,14 @@
           </ul>
 
           <div class="content">
-            <form action="##">
+            <form>
               <div class="input-text clearFix">
                 <span></span>
-                <input type="text" placeholder="邮箱/用户名/手机号" />
+                <input type="text" placeholder="手机号" v-model="form.phone" />
               </div>
               <div class="input-text clearFix">
                 <span class="pwd"></span>
-                <input type="text" placeholder="请输入密码" />
+                <input type="password" placeholder="请输入密码" v-model="form.password" />
               </div>
               <div class="setting clearFix">
                 <label class="checkbox inline">
@@ -30,7 +30,7 @@
                 </label>
                 <span class="forget">忘记密码？</span>
               </div>
-              <button class="btn">登&nbsp;&nbsp;录</button>
+              <button class="btn" @click.prevent="userLogin">登&nbsp;&nbsp;录</button>
             </form>
 
             <div class="call clearFix">
@@ -65,8 +65,26 @@
 </template>
 
 <script>
+import user_api from "@/api/user/index";
 export default {
   name: "Login",
+  data() {
+    return {
+      form: {
+        phone: "",
+        password: "",
+      },
+    };
+  },
+  methods: {
+    async userLogin() {
+      let { phone, password } = this.form;
+      if (phone && password) {
+        await this.$store.dispatch("user/userLogin", this.form);
+        this.$router.push({ path: "/home" });
+      }
+    },
+  },
 };
 </script>
 

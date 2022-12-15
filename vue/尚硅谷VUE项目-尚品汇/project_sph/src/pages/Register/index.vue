@@ -8,32 +8,32 @@
       </h3>
       <div class="content">
         <label>手机号:</label>
-        <input type="text" placeholder="请输入你的手机号" />
+        <input type="text" placeholder="请输入你的手机号" v-model="form.phone" />
         <span class="error-msg">错误提示信息</span>
       </div>
       <div class="content">
         <label>验证码:</label>
-        <input type="text" placeholder="请输入验证码" />
-        <button style="width: 100px; height: 38px">获取验证码</button>
+        <input type="text" placeholder="请输入验证码" v-model="form.code" />
+        <button style="width: 100px; height: 38px" @click="getSendCode">获取验证码</button>
         <span class="error-msg">错误提示信息</span>
       </div>
       <div class="content">
         <label>登录密码:</label>
-        <input type="text" placeholder="请输入你的登录密码" />
+        <input type="password" placeholder="请输入你的登录密码" v-model="form.password" />
         <span class="error-msg">错误提示信息</span>
       </div>
       <div class="content">
         <label>确认密码:</label>
-        <input type="text" placeholder="请输入确认密码" />
+        <input type="password" placeholder="请输入确认密码" v-model="form.password1" />
         <span class="error-msg">错误提示信息</span>
       </div>
       <div class="controls">
-        <input name="m1" type="checkbox" />
+        <input name="m1" type="checkbox" v-model="form.agree" />
         <span>同意协议并注册《尚品汇用户协议》</span>
         <span class="error-msg">错误提示信息</span>
       </div>
       <div class="btn">
-        <button>完成注册</button>
+        <button @click="userRegister">完成注册</button>
       </div>
     </div>
 
@@ -56,8 +56,37 @@
 </template>
 
 <script>
+import user_api from "@/api/user/index";
 export default {
   name: "Register",
+  data() {
+    return {
+      form: {
+        phone: "", // 手机号
+        code: "", // 验证码
+        password: "", // 密码
+        password1: "", // 确认密码
+        agree: false, // 是否同意
+      },
+    };
+  },
+  methods: {
+    // 获取验证码
+    async getSendCode() {
+      let { phone } = this.form;
+      if (!phone) return;
+      let data = await user_api.getSendCode(phone);
+      this.form.code = data;
+    },
+    // 注册用户
+    async userRegister() {
+      let { phone, code, password, password1, agree } = this.form;
+      if (phone && code && password && password1 && agree && password == password1) {
+        await user_api.getRegister(this.form);
+        this.$router.push({ path: "/login" });
+      }
+    },
+  },
 };
 </script>
 
