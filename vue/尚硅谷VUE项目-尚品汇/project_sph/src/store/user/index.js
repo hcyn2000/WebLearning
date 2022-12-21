@@ -19,11 +19,13 @@ const actions = {
   async getUserInfo({ commit }) {
     let res = await user_api.getUserInfo();
     commit("GETUSERINFO", res);
+    return ok;
   },
   // 退出登录
   async getLogout({ commit }) {
     await user_api.getLogout();
     commit("GETLOGOUT");
+    return ok;
   },
 };
 

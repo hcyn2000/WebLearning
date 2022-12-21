@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
 import routes from "./routes";
-
+import store from "@/store";
 // 先把VueRouter原型对象的push，先保存一份
 let originPush = VueRouter.prototype.push;
 let originReplace = VueRouter.prototype.replace;
@@ -48,6 +48,38 @@ const router = new VueRouter({
   scrollBehavior(to, from, savedPosition) {
     return { y: 0 }; // 代表滚动条在最上方
   },
+});
+
+router.beforeEach(async (to, from, next) => {
+  // to：可以获取到你要跳转到哪个路由的信息
+  // from：可以获取到你从哪个路由而来的信息
+  // next：放行函数  next()放行   next(path) 放行到指定路由   next(false) 阻止放行
+  // console.log(to, from);
+  // next();
+  let token = store.state.user.token;
+  let name = store.state.user.userInfo.name;
+  // 已登录
+  if (token) {
+    // 用户已经登录了不能去login页面
+    if (to.path == "/login") {
+      next(from.path);
+    } else {
+      if (name) {
+        next();
+      } else {
+        try {
+          await store.dispatch("user/getUserInfo");
+          next();
+        } catch (error) {
+          await store.dispatch("user/getLogout");
+          next("/login");
+        }
+      }
+    }
+    // 未登录
+  } else {
+    next();
+  }
 });
 
 export default router;

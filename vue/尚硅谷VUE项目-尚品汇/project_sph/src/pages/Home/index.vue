@@ -55,7 +55,6 @@ export default {
   mounted() {
     this.$store.dispatch("home/categoryList"); // 获取商品分类三级列表
     this.$store.dispatch("home/getFloorList");
-    this.$store.dispatch("user/getUserInfo");
   },
   created() {},
 };

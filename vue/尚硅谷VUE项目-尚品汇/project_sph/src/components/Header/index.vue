@@ -5,7 +5,7 @@
       <div class="container">
         <div class="loginList">
           <p>尚品汇欢迎您！</p>
-          <p v-if="!userInfo.name">
+          <p v-if="userInfo && !userInfo.name">
             <span>请</span>
             <router-link to="/login">登录</router-link>
             <router-link to="/register" class="register">免费注册</router-link>
@@ -101,6 +101,7 @@ export default {
           margin-right: 10px;
 
           .register {
+            cursor: pointer;
             border-left: 1px solid #b3aeae;
             padding: 0 5px;
             margin-left: 5px;
