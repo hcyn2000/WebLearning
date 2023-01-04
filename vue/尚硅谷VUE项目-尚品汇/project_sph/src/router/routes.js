@@ -43,6 +43,15 @@ export default [
       isFooter: true,
     },
   },
+  // 结算页面
+  {
+    name: "trade",
+    path: "/trade",
+    component: () => import("@/pages/Trade"),
+    meta: {
+      isFooter: true,
+    },
+  },
   {
     path: "/login",
     component: () => import("@/pages/Login"),

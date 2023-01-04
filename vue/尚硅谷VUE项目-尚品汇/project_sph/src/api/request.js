@@ -39,6 +39,8 @@ requests.interceptors.response.use(
     let res = response.data;
     if (res.code == 200) {
       return res.data;
+    } else {
+      return Promise.reject(new Error("faile"));
     }
   },
   (error) => {

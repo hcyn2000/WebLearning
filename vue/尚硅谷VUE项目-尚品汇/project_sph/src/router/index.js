@@ -56,8 +56,9 @@ router.beforeEach(async (to, from, next) => {
   // next：放行函数  next()放行   next(path) 放行到指定路由   next(false) 阻止放行
   // console.log(to, from);
   // next();
-  let token = store.state.user.token;
-  let name = store.state.user.userInfo.name;
+  let userObj = store.state.user;
+  let token = userObj.token;
+  let name = (userObj.userInfo && userObj.userInfo.name) || "";
   // 已登录
   if (token) {
     // 用户已经登录了不能去login页面
