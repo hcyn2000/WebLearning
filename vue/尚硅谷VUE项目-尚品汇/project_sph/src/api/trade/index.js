@@ -17,4 +17,26 @@ export default {
       params: params,
     });
   },
+  // 提交订单
+  getSubmitOrder(params) {
+    return requests({
+      url: `/order/auth/submitOrder?tradeNo=${params.tradeNo}`,
+      method: "post",
+      data: params,
+    });
+  },
+  // 获取订单支付信息
+  getCreateNative(orderId) {
+    return requests({
+      url: `/payment/weixin/createNative/${orderId}`,
+      method: "get",
+    });
+  },
+  // 查询支付订单状态
+  getQueryPayStatus(orderId) {
+    return requests({
+      url: `/payment/weixin/queryPayStatus/${orderId}`,
+      method: "get",
+    });
+  },
 };

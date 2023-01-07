@@ -37,8 +37,8 @@ requests.interceptors.response.use(
     // 进度条结束
     nProgress.done();
     let res = response.data;
-    if (res.code == 200) {
-      return res.data;
+    if (res.code == 200 || res.code == 205) {
+      return res.data || res.message;
     } else {
       return Promise.reject(new Error("faile"));
     }

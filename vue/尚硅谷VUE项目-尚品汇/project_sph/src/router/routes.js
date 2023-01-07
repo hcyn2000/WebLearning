@@ -52,6 +52,24 @@ export default [
       isFooter: true,
     },
   },
+  // 支付页面
+  {
+    name: "pay",
+    path: "/pay",
+    component: () => import("@/pages/Pay"),
+    meta: {
+      isFooter: true,
+    },
+  },
+  // 支付成功页面
+  {
+    name: "paySuccess",
+    path: "/paySuccess",
+    component: () => import("@/pages/PaySuccess"),
+    meta: {
+      isFooter: true,
+    },
+  },
   {
     path: "/login",
     component: () => import("@/pages/Login"),

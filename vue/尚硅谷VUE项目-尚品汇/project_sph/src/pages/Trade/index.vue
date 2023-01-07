@@ -92,7 +92,7 @@
       </div>
     </div>
     <div class="sub clearFix">
-      <router-link class="subBtn" to="/pay">提交订单</router-link>
+      <a class="subBtn" @click="submitOrder">提交订单</a>
     </div>
   </div>
 </template>
@@ -106,6 +106,7 @@ export default {
       adderss: [], // 用户地址信息
       orderInfo: {}, // 商品清单
       orderComment: "", // 买家备注
+      orderId: "", // 订单号
     };
   },
   computed: {
@@ -115,6 +116,21 @@ export default {
     },
   },
   methods: {
+    // 提交订单
+    async submitOrder() {
+      let params = {
+        tradeNo: this.orderInfo.tradeNo,
+        consignee: this.userDefaultAddress.consignee,
+        consigneeTel: this.userDefaultAddress.phoneNum,
+        deliveryAddress: this.userDefaultAddress.fullAddress,
+        paymentWay: "ONLINE",
+        orderComment: this.orderComment,
+        orderDetailList: this.orderInfo.detailArrayList,
+      };
+      let data = await trade_api.getSubmitOrder(params);
+      this.orderId = data;
+      this.$router.push({ path: "/pay", query: { orderId: this.orderId } });
+    },
     // 点击切换地址
     changeDefault(item) {
       this.adderss.forEach((item) => (item.isDefault = 0));
@@ -377,6 +393,7 @@ export default {
     margin: 0 auto 10px;
 
     .subBtn {
+      cursor: pointer;
       float: right;
       width: 164px;
       height: 56px;
