@@ -81,7 +81,8 @@ export default {
       let { phone, password } = this.form;
       if (phone && password) {
         await this.$store.dispatch("user/userLogin", this.form);
-        this.$router.push({ path: "/home" });
+        let toPath = this.$route.query.redirect || "/home";
+        this.$router.push({ path: toPath });
       }
     },
   },

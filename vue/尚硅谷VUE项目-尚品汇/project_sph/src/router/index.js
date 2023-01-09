@@ -79,7 +79,14 @@ router.beforeEach(async (to, from, next) => {
     }
     // 未登录
   } else {
-    next();
+    let toPath = to.path;
+    let list = ["/trade", "/pay", "/paysuccess", "/center/myOrder"];
+    console.log(toPath);
+    if (list.includes(toPath)) {
+      next("/login?redirect=" + toPath);
+    } else {
+      next();
+    }
   }
 });
 
