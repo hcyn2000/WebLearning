@@ -70,6 +70,33 @@ export default [
       isFooter: true,
     },
   },
+  // 个人中心页面
+  {
+    name: "center",
+    path: "/center",
+    component: () => import("@/pages/Center"),
+    meta: {
+      isFooter: true,
+    },
+    children: [
+      {
+        name: "myOrder",
+        path: "myOrder",
+        component: () => import("@/pages/Center/myOrder"),
+        meta: {
+          isFooter: true,
+        },
+      },
+      {
+        name: "groupOrder",
+        path: "groupOrder",
+        component: () => import("@/pages/Center/groupOrder"),
+        meta: {
+          isFooter: true,
+        },
+      },
+    ],
+  },
   {
     path: "/login",
     component: () => import("@/pages/Login"),

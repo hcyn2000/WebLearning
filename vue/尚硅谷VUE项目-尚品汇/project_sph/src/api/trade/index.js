@@ -39,4 +39,11 @@ export default {
       method: "get",
     });
   },
+  // 获取我的订单列表
+  getAuth(params) {
+    return requests({
+      url: `/order/auth/${params.page}/${params.limit}`,
+      method: "get",
+    });
+  },
 };
