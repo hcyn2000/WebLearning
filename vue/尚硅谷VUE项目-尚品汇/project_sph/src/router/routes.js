@@ -43,13 +43,23 @@ export default [
       isFooter: true,
     },
   },
-  // 结算页面
+  // 交易页面
   {
     name: "trade",
     path: "/trade",
     component: () => import("@/pages/Trade"),
     meta: {
       isFooter: true,
+    },
+    // 路由独享守卫
+    beforeEnter: (to, from, next) => {
+      // 从购物车页面来的就放行
+      if (from.path == "/shopCart") {
+        next();
+      } else {
+        // 其他路由而来停留在当前页面
+        next(false);
+      }
     },
   },
   // 支付页面
@@ -59,6 +69,16 @@ export default [
     component: () => import("@/pages/Pay"),
     meta: {
       isFooter: true,
+    },
+    // 路由独享守卫
+    beforeEnter: (to, from, next) => {
+      // 从交易页面来的就放行
+      if (from.path == "/trade") {
+        next();
+      } else {
+        // 其他路由而来停留在当前页面
+        next(false);
+      }
     },
   },
   // 支付成功页面
