@@ -1,13 +1,20 @@
-const promise = new Promise((resolve, reject) => {
-  console.log("111");
-  resolve("hhh");
-  reject("error");
-  resolve("eee");
-  console.log("333");
+async function async1() {
+  console.log("async1 start");
+  await async2();
+  console.log("asnyc1 end");
+}
+async function async2() {
+  console.log("async2");
+}
+console.log("script start");
+setTimeout(() => {
+  console.log("setTimeOut");
+}, 0);
+async1();
+new Promise(function (reslove) {
+  console.log("promise1");
+  reslove();
+}).then(function () {
+  console.log("promise2");
 });
-
-promise.then(() => {
-  console.log("444");
-});
-
-console.log("555");
+console.log("script end");

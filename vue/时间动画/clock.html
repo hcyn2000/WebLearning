@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./click.css">
+</head>
+<body>
+  <div id="clock">
+    <!-- <div class="clock-num">
+      <div class="one-side top-left" :class="{'hide-x': curNum[1] == 0}"></div>
+      <div class="one-side top" :class="{'hide-y': curNum[2] == 0}"></div>
+      <div class="one-side top-right" :class="{'hide-x': curNum[3] == 0}"></div>
+      <div class="one-side bottom-right" :class="{'hide-x': curNum[4] == 0}"></div>
+      <div class="one-side bottom" :class="{'hide-y': curNum[5] == 0}"></div>
+      <div class="one-side bottom-left" :class="{'hide-x': curNum[6] == 0}"></div>
+      <div class="one-side middle" :class="{'hide-y': curNum[7] == 0}"></div>
+    </div> -->
+    <!-- <input type="text" v-model="s1" class="num-type" maxlength="1"> -->
+    <div class="clock-area">
+      <num-item :curnum="getShowStyle(0)"></num-item>
+      <num-item :curnum="getShowStyle(1)"></num-item>
+      <div class="colon">:</div>
+      <num-item :curnum="getShowStyle(2)"></num-item>
+      <num-item :curnum="getShowStyle(3)"></num-item>
+      <div class="colon">:</div>
+      <num-item :curnum="getShowStyle(4)"></num-item>
+      <num-item :curnum="getShowStyle(5)"></num-item>
+    </div>
+    </div>
+  <script src="./vue.global.js"></script>
+  <script src="./clock.js"></script>
+</body>
+</html>

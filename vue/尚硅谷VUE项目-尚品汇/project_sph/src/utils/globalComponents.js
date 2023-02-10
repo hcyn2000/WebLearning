@@ -19,3 +19,6 @@ Vue.component(Pageination.name, Pageination);
 import { MessageBox } from "element-ui";
 Vue.prototype.$msgbox = MessageBox;
 Vue.prototype.$alert = MessageBox.alert;
+
+// 注册图片懒加载组件
+import VueLazyload from "vue-lazyload";
