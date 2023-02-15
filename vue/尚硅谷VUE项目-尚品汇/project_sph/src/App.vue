@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1 v-upper="'abc'"></h1>
     <Header ref="Header"></Header>
     <router-view></router-view>
     <Footer v-show="$route.meta.isFooter"></Footer>
