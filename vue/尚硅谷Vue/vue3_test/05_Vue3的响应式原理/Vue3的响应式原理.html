@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 源数据
+      let person = {
+        name: "周桑",
+      };
+
+      /*
+      // 模拟Vue2中的实现响应式
+      // let p = {};
+      // Object.defineProperty(p, "name", {
+      //   // 有人取时调用
+      //   configurable: true, // 可配置
+      //   get() {
+      //     console.log("get");
+      //     return person.name;
+      //   },
+      //   // 有人修改时调用
+      //   set(value) {
+      //     console.log("set");
+      //     person.name = value;
+      //   },
+      // });
+      */
+
+      // 模拟Vue3中的实现响应式
+      const p = new Proxy(person, {
+        // 读取了p的某个属性调用
+        get(target, propName) {
+          console.log(`有人读取了p身上${propName}属性`);
+          return Reflect.get(target, propName);
+        },
+        // 修改了p的某个属性、或者追加了新属性 调用
+        set(target, propName, value) {
+          console.log(`有人修改了p身上${propName}属性`);
+          Reflect.set(target, propName, value);
+        },
+        // 删除了p的某个属性调用
+        deleteProperty(target, propName) {
+          console.log(`有人删除了p身上${propName}属性`);
+          return Reflect.deleteProperty(target, propName);
+        },
+      });
+    </script>
+  </body>
+</html>
