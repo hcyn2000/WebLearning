@@ -9,17 +9,10 @@
   <hr />
   <h2>sum的值是{{ sum }}</h2>
   <button @click="sum++">x值改变</button>
-  <hr />
-  <button @click="showRawPerson">输出原始person</button>
-  <hr />
-  <h3 v-show="person.car">车的信息:{{ person.car }}</h3>
-  <button @click="addCar">添加一台车</button>
-  <button @click="person.car.name += '!'">修改车的名称</button>
-  <button @click="person.car.price++">修改车的价格</button>
 </template>
 
 <script>
-import { reactive, toRef, toRefs, ref, toRaw, markRaw } from "vue";
+import { reactive, toRef, toRefs, ref, readonly, shallowReadonly } from "vue";
 export default {
   name: "Demo",
   setup() {
@@ -35,17 +28,11 @@ export default {
       },
     });
 
-    function showRawPerson() {
-      // toRaw 把reactive生成的响应式对象变成普通对象
-      let per = toRaw(person);
-      console.log(per);
-    }
+    // person = readonly(person); // readonly  让一个响应式数据变为只读的（深只读）
+    person = shallowReadonly(person); // shallowReadonly 让一个响应式数据变为只读的（浅只读）
 
-    function addCar() {
-      let car = { name: "奔驰", price: 40 };
-      // markRaw 让一个对象可以不是响应式的
-      person.car = markRaw(car);
-    }
+    sum = readonly(sum);
+    // sum = shallowReadonly(sum);
 
     //返回一个对象（常用）
     return {
@@ -53,8 +40,6 @@ export default {
       ...toRefs(person),
       salary: toRef(person.job.j1, "salary"),
       sum,
-      showRawPerson,
-      addCar,
     };
   },
 };
