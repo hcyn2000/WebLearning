@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        background-color: #999;
+      }
+      .mask-image {
+        width: 250px;
+        height: 187.5px;
+        -webkit-mask-image: url("../images/头像.png");
+        -webkit-mask-repeat: no-repeat;
+        -webkit-mask-size: contain;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="../images/ps1.jpg" class="mask-image" />
+
+    <!-- 
+    mask-size属性性质上和background-size类似，支持的属性值也类似，作用是控制遮罩图片尺寸。
+
+    默认值是auto.
+
+    支持contain和cover这两个关键字：
+      mask-size: cover;
+      mask-size: contain;
+
+    支持各类数值（缺省高度会自动计算为auto）：
+      mask-size: 50%;
+      mask-size: 3em;
+      mask-size: 12px;
+
+      mask-size: 50% auto;
+      mask-size: 3em 25%;
+      mask-size: auto 6px;
+
+    同样支持多属性值：
+      mask-size: 50%, 25%, 25%;
+      mask-size: 6px, auto, contain;
+    -->
+  </body>
+</html>

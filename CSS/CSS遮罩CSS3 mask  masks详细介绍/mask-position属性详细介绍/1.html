@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        background-color: #999;
+      }
+      .mask-image {
+        width: 250px;
+        height: 187.5px;
+        -webkit-mask-image: url("../images/loading_blue.png");
+        mask-image: url("../images/loading_blue.png");
+        -webkit-mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="../images/ps1.jpg" class="mask-image" />
+
+    <!-- 
+      支持单个关键字（缺省关键字的解析为center）：
+        mask-position: top;
+        mask-position: bottom;
+        mask-position: left;
+        mask-position: right;
+        mask-position: center;
+
+      支持垂直和水平方向两个关键字：
+        mask-position: right top;
+        
+      支持各类数值：
+        mask-position: 30% 50%;
+        mask-position: 10px 5rem;
+
+      由于mask-image支持多遮罩图片，因此，mask-position也支持多属性值，例如：
+        mask-position: 0 0, center; 
+    -->
+  </body>
+</html>
