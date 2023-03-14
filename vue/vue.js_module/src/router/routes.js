@@ -11,4 +11,8 @@ export default [
     path: "/a3",
     component: () => import("@/views/A3"),
   },
+  {
+    path: "/a4",
+    component: () => import("@/views/A4"),
+  },
 ];

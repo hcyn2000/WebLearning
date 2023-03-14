@@ -1,5 +1,5 @@
 <template>
-  <div><B></B></div>
+  <div><B @test="test"></B></div>
 </template>
 
 <script>
@@ -13,7 +13,7 @@ export default {
   // 组件方法
   methods: {
     test(value) {
-      // console.log(value);
+      console.log("a3", value);
     },
   },
 };
