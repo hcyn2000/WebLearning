@@ -13,23 +13,23 @@ export default {
   name: "App",
   components: {},
   data() {
-    return {}
+    return {};
   },
   methods: {
     img() {
-      let app = document.getElementById("app")
-      let el = document.createElement("img")
-      el.style.width = "30px"
-      el.style.height = "30px"
-      el.src = "./bridge_1.svg"
-      app.appendChild(el)
+      let app = document.getElementById("app");
+      let el = document.createElement("img");
+      el.style.width = "30px";
+      el.style.height = "30px";
+      el.src = "./bridge_1.svg";
+      app.appendChild(el);
     },
   },
   mounted() {
-    this.img()
+    this.img();
   },
   created() {},
-}
+};
 </script>
 
 <style scoped></style>
