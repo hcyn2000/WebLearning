@@ -2,7 +2,12 @@
   <div class="modal" v-if="props.status">
     <div class="modal-content">
       <div class="modal-header">{{ props.title }}</div>
-      <div class="modal-body">{{ props.content }}</div>
+      <div class="modal-body">
+        <div>
+          {{ props.content }}
+        </div>
+        <slot></slot>
+      </div>
       <Footer @onCancel="onCancel" @onOk="onOk"></Footer>
     </div>
   </div>

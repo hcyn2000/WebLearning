@@ -2,7 +2,15 @@
   {{ title }}
   <button @click="defaultModal">default Modal</button>
   <button @click="confirmModal">confirm Modal</button>
-  <Modal title="学习提示" content="打开了一个弹窗" v-model:status="modalVisible"></Modal>
+  <Modal title="学习提示" content="打开了一个弹窗" v-model:status="modalVisible">
+    <form>
+      <label>姓名:</label>
+      <input v-model="name" placeholder="请输入姓名" />
+      <br />
+      <label>年龄:</label>
+      <input v-model="age" placeholder="请输入姓名" />
+    </form>
+  </Modal>
 </template>
 
 <script setup>
