@@ -1,6 +1,6 @@
 <template>
   <div class="modal" v-if="props.status">
-    <div class="modal-content">
+    <div class="modal-content" v-position:[modalPosition]="100">
       <div class="modal-header">{{ props.title }}</div>
       <div class="modal-body">
         <div>
@@ -15,7 +15,7 @@
 
 <script setup>
 import Footer from "./Footer.vue";
-import { defineProps, defineEmits } from "vue";
+import { defineProps, defineEmits, ref } from "vue";
 
 const props = defineProps({
   title: String,
@@ -24,8 +24,14 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  close: {
+    type: Function,
+    default() {
+      return () => {};
+    },
+  },
 });
-
+let modalPosition = ref("top");
 const emit = defineEmits(["update:status"]);
 
 const onCancel = () => {
@@ -33,7 +39,8 @@ const onCancel = () => {
 };
 
 const onOk = () => {
-  emit("update:status", false);
+  // emit("update:status", false);
+  props.close();
 };
 </script>
 
