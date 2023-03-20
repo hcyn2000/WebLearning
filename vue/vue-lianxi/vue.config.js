@@ -7,4 +7,5 @@ module.exports = {
   //   assetsDir: "static",
   //   assetsPublicPath: "./",
   // },
+  lintOnSave: false,
 };

@@ -13,8 +13,11 @@ const routes = [
   {
     path: "/customList",
     name: "CustomList",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/customList.vue"),
+    component: () => import(/* webpackChunkName: "about" */ "../views/customList.vue"),
+  },
+  {
+    path: "/testPorp",
+    component: () => import("../views/TestPorp"),
   },
 ];
 
