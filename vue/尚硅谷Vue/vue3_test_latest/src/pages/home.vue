@@ -3,7 +3,7 @@
   <button @click="defaultModal">default Modal</button>
   <button @click="confirmModal">confirm Modal</button>
   <button @click="clickOpenDialog">打开弹窗</button>
-  <Modal title="学习提示" content="打开了一个弹窗" v-model:status="modalVisible">
+  <Modal v-bind="modal" v-model:status="modalVisible">
     <form>
       <label>姓名:</label>
       <input v-focus v-model="name" placeholder="请输入姓名" />
@@ -30,6 +30,10 @@ let { name, age } = {
 let title = ref("这里是home页面");
 let modalVisible = ref(false);
 let modalType = ref("default");
+let modal = {
+  title: "学习标题",
+  content: "打开了一个弹窗",
+};
 
 provide("modalType", modalType);
 
