@@ -1,0 +1,51 @@
+{
+  "id": "3988172",
+  "name": "记账app",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "34202198",
+      "name": "闭眼闭",
+      "font_class": "biyanbi",
+      "unicode": "e85c",
+      "unicode_decimal": 59484
+    },
+    {
+      "icon_id": "795509",
+      "name": "眼睛",
+      "font_class": "ai-eye",
+      "unicode": "e669",
+      "unicode_decimal": 58985
+    },
+    {
+      "icon_id": "9839027",
+      "name": "搜索",
+      "font_class": "sousuo1",
+      "unicode": "e6d9",
+      "unicode_decimal": 59097
+    },
+    {
+      "icon_id": "6207866",
+      "name": "人民币",
+      "font_class": "ziyuanldpi",
+      "unicode": "e630",
+      "unicode_decimal": 58928
+    },
+    {
+      "icon_id": "9844045",
+      "name": "11-记账",
+      "font_class": "jizhang",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "14095222",
+      "name": "分析",
+      "font_class": "fenxi",
+      "unicode": "e76d",
+      "unicode_decimal": 59245
+    }
+  ]
+}
