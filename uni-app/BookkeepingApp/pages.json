@@ -2,13 +2,10 @@
   "pages": [
     //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
     {
-      "path": "pages/home/index",
-      "style": {
-        "app-plus": {
-          //app配置自定义导航
-          "titleNView": false //app禁止使用原神导航
-        }
-      }
+      "path": "pages/home/index"
+    },
+    {
+      "path": "pages/takeNotes/index"
     }
   ],
   "globalStyle": {
@@ -19,7 +16,8 @@
     "backgroundColor": "#F8F8F8",
     "app-plus": {
       "background": "#f0f1f3",
-      "softinputMode": "adjustResize",
+      // "softinputMode": "adjustResize",
+      "softinputMode": "adjustPan",
       "titleNView": false,
       // 将回弹属性关掉
       "bounce": "none",

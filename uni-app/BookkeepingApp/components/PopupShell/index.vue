@@ -1,20 +1,14 @@
 <template>
-  <!-- <transition
-    enter-active-class="animate__fadeIn"
-    leave-active-class="animate__fadeOut"
-    class="my-popupShell"
-  > -->
   <view class="popupShell-container" v-if="visible">
-    <!-- <view class="popupShell-mask"></view> -->
-    <view class="popupShell-centent">
+    <view class="popupShell-mask"></view>
+    <view class="popupShell-centent" :style="{ bottom: popupShellCententBottom + 'px' }">
       <slot></slot>
     </view>
   </view>
-  <!-- </transition> -->
 </template>
 
 <script setup>
-import { defineProps } from "vue";
+import { ref, defineProps } from "vue";
 defineProps({
   // 是否显示弹窗
   visible: {
@@ -22,17 +16,32 @@ defineProps({
     default: false,
   },
 });
+let popupShellCententBottom = ref(0); // bottom
+
+function changeBottom(height) {
+  popupShellCententBottom.value = height;
+}
+defineExpose({
+  changeBottom,
+});
 </script>
 
 <style scoped lang="scss">
-.my-popupShell {
-  animation-duration: 0.3s;
+.popupShell-enter-active,
+.popupShell-leave-active {
+  transition: opacity 2.5s ease;
+}
+
+.popupShell-enter-from,
+.popupShell-leave-to {
+  opacity: 0;
 }
 .popupShell-container {
-  position: absolute;
+  position: fixed;
   top: 0;
   width: 100vw;
   height: 100vh;
+  z-index: 10;
   .popupShell-mask {
     position: absolute;
     left: 0;
@@ -41,11 +50,10 @@ defineProps({
     bottom: 0;
     opacity: 0.5;
     background: #000;
-    z-index: 10;
   }
   .popupShell-centent {
     position: absolute;
-    bottom: 0;
+    bottom: 0px;
     z-index: 11;
     padding: 40rpx;
     width: 100%;
