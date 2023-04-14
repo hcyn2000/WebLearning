@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>下班倒计时</title>
+    <title>抢票倒计时</title>
     <style>
       * {
         margin: 0;
@@ -29,7 +29,7 @@
   </head>
 
   <body>
-    <p>距离下班还有</p>
+    <p>距离抢票还有</p>
 
     <p><span></span></p>
 
@@ -45,7 +45,9 @@
 
         var oldTime = oDate.getTime(); //现在距离1970年的毫秒数
 
-        var newDate = new Date(oDate.getFullYear() + "/" + (oDate.getMonth() + 1) + "/" + oDate.getDate() + " 17:30:00");
+        var newDate = new Date(
+          oDate.getFullYear() + "/" + (oDate.getMonth() + 1) + "/" + oDate.getDate() + " 17:17:00"
+        );
 
         var newTime = newDate.getTime(); //倒计时时间距离1970年的毫秒数
 
@@ -66,7 +68,12 @@
         var str =
           // tow(day) +
           // '<span class="time">天</span>' +
-          tow(hour) + '<span class="time">小时</span>' + tow(minute) + '<span class="time">分钟</span>' + tow(second) + '<span class="time">秒</span>';
+          tow(hour) +
+          '<span class="time">小时</span>' +
+          tow(minute) +
+          '<span class="time">分钟</span>' +
+          tow(second) +
+          '<span class="time">秒</span>';
 
         oSpan.innerHTML = str;
       }
