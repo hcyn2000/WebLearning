@@ -1,6 +1,6 @@
 <template>
-  <view class="home-container flex-col" id="homeContainer">
-    <view class="status_bar"></view>
+  <view class="home-container">
+    <ContainerShell></ContainerShell>
     <view class="home-head flex-center-between">
       <view class="home-head_left">我的记账本</view>
       <view class="iconfont icon-sousuo1"></view>
@@ -13,7 +13,7 @@
       </view>
     </scroll-view>
     <view class="home-bottom">
-      <view class="home-bottom_bookkeeping flex-items-center">
+      <view class="home-bottom_bookkeeping flex-items-center" @click="jumpToPage">
         <view class="iconfont icon-jizhang marginR-4"></view>记一笔
       </view>
     </view>
@@ -21,20 +21,23 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import ContainerShell from "@/components/ContainerShell";
 import Top from "./components/top.vue";
 import Bottom from "./components/bottom.vue";
+import { ref } from "vue";
+
 let scrollTop = ref(0);
+
+function jumpToPage() {
+  uni.navigateTo({
+    url: "/pages/takeNotes/index",
+  });
+}
 </script>
 
 <style lang="scss" scoped>
 .home-container {
   height: 100vh;
-  .status_bar {
-    height: var(--status-bar-height);
-    width: 100%;
-    background: #f0f1f3;
-  }
   .home-head {
     padding: 0 30rpx;
     width: 100%;
@@ -50,7 +53,7 @@ let scrollTop = ref(0);
     }
   }
   .scroll-Y {
-    height: calc(100vh - 104rpx);
+    height: calc(100vh - var(--status-bar-height) - 104rpx);
     background-color: #f7f7f9;
     .home-content {
       padding: 20rpx 0rpx;

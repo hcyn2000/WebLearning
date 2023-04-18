@@ -20,13 +20,13 @@
           <text v-else>****</text>
         </view>
       </view>
-      <view class="income-box_item flex-align-end flex1" @click="openBudgetPopup">
+      <!-- <view class="income-box_item flex-align-end flex1" @click="openBudgetPopup">
         预算剩余
         <view class="income-box_item_money">
-          <text v-if="isMoney">{{ money.budgetValue ? money.budgetValue : "未设置预算" }}</text>
+          <text v-if="isMoney">{{ moneyStore.budgetValue ? moneyStore.budgetValue : "未设置预算" }}</text>
           <text v-else>****</text>
         </view>
-      </view>
+      </view> -->
     </view>
     <!-- 查看图表分析 -->
     <view class="home-content_bottom flex-center">
@@ -42,7 +42,7 @@ import BudgetPopup from "@/components/BudgetPopup";
 import { ref } from "vue";
 import { useMoneyStore } from "@/stores/money";
 
-const money = useMoneyStore();
+const moneyStore = useMoneyStore();
 let pay = ref(1000000); // 收入金额
 let income = ref(1000000); // 收入金额
 let isMoney = ref(true); // 是否显示金额
