@@ -2,8 +2,11 @@
   <view class="bookkeepingEditing-container">
     <view class="edit-top flex-center-between">
       <view class="flex-items-center">
-        <view class="edit-top_icon iconfont icon-jiaotong flex-center"></view>
-        <view class="edit-top_title">餐饮</view>
+        <view
+          class="edit-top_icon iconfont flex-center"
+          :class="'icon-' + typeStore.typeList[typeIndex].icon"
+        ></view>
+        <view class="edit-top_title">{{ typeStore.typeList[typeIndex].name }}</view>
       </view>
       <view class="flex-items-center" style="font-size: 40rpx">
         <view class="iconfont icon-ziyuanldpi"></view>{{ amount }}
@@ -21,14 +24,17 @@
         <view>{{ item.name }}</view>
       </view>
     </view>
-
     <view class="edit-bottom">
       <view class="numKeyboard-box">
-        <view class="numKeyboard-item" v-for="(item, index) in numKeyboardList" :key="index">{{
-          item
-        }}</view>
+        <view
+          class="numKeyboard-item"
+          v-for="(item, index) in numKeyboardList"
+          :key="index"
+          @click="inputNumFun(item)"
+          >{{ item }}</view
+        >
         <view class="numKeyboard-item item-cha"><view class="iconfont icon-chahao"></view></view>
-        <view class="numKeyboard-item item-determine">确定</view>
+        <view class="numKeyboard-item item-determine" @click="determineFun">确定</view>
       </view>
     </view>
   </view>
@@ -37,15 +43,42 @@
 <script setup>
 import { ref, reactive } from "vue";
 import { useTypeStore } from "@/stores/type";
+import { returnFloat } from "@/utils/publicMethods.js";
 
 const typeStore = useTypeStore();
-let amount = ref(0);
+let amount = ref(0); // 金额
 let typeIndex = ref(0); // 选中type的index
 let numKeyboardList = reactive([1, 2, 3, 4, 5, 6, 7, 8, 9, "清零", 0, "."]);
+let typeSelected = reactive({});
 
-//
+// 改变选中类型
 function changeType(item, index) {
   typeIndex.value = index;
+}
+
+// 输入数字
+function inputNumFun(item) {
+  if (item == "清零") {
+    amount.value = 0;
+  } else {
+    if (amount.value.length > 9) return;
+    if (amount.value == 0) amount.value = "";
+    amount.value += item;
+  }
+}
+
+// 确定按钮
+function determineFun() {
+  if (amount.value == 0) return;
+  typeSelected.type = typeStore.typeList[typeIndex.value];
+  typeSelected.num = returnFloat(amount.value);
+  typeStore.addConsume(typeSelected);
+  amount.value = 0;
+  typeIndex.value = 0;
+
+  uni.navigateTo({
+    url: "/pages/home/index",
+  });
 }
 </script>
 

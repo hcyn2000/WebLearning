@@ -1,20 +1,29 @@
 <template>
   <view class="payItem-container flex-center-between">
     <view class="payItem-left flex-items-center">
-      <view class="payItem-icon iconfont icon-jiaotong flex-center"></view>
-      <view class="payItem-title">餐饮</view>
+      <view class="payItem-icon iconfont flex-center" :class="'icon-' + payItem.type.icon"></view>
+      <view class="payItem-title">{{ payItem.type.name }}</view>
     </view>
     <view class="payItem-right flex-col flex-align-end">
       <view class="payItem-money flex-items-center">
         <view class="iconfont icon-ziyuanldpi"></view>
-        20.00
+        {{ payItem.num }}
       </view>
       <view class="payItem-time">今天 11:20</view>
     </view>
   </view>
 </template>
 
-<script setup></script>
+<script setup>
+defineProps({
+  payItem: {
+    type: Object,
+    default() {
+      return { type: {} };
+    },
+  },
+});
+</script>
 <style lang="scss" scoped>
 .payItem-container {
   margin-bottom: 14rpx;

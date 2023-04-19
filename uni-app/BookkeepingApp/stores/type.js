@@ -3,6 +3,7 @@ import { defineStore } from "pinia";
 export const useTypeStore = defineStore("type", {
   state: () => {
     return {
+      // 类型默认数组
       typeList: [
         { name: "餐饮", icon: "canyin" },
         { name: "交通", icon: "jiaotong" },
@@ -17,9 +18,13 @@ export const useTypeStore = defineStore("type", {
         { name: "化妆品", icon: "huazhuangpin" },
         { name: "宠物", icon: "chongwu" },
       ],
+      // 消费数组
+      consumeList: [],
     };
   },
-  // 也可以这样定义
-  // state: () => ({ count: 0 })
-  actions: {},
+  actions: {
+    addConsume(res) {
+      this.consumeList.push(res);
+    },
+  },
 });
