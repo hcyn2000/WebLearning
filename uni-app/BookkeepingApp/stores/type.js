@@ -24,7 +24,7 @@ export const useTypeStore = defineStore("type", {
   },
   actions: {
     addConsume(res) {
-      this.consumeList.push(res);
+      this.consumeList.unshift(res);
     },
   },
 });

@@ -1,5 +1,9 @@
 <template>
   <view class="uni-tab-bar">
+    <navigator url="/pages/home/index" class="return-box flex-center">
+      <view class="iconfont icon-fanhui"></view>
+    </navigator>
+
     <scroll-view class="uni-swiper-tab" scroll-x>
       <view class="swiper-tab-list">
         <view
@@ -40,10 +44,29 @@ function tabtap(index) {
 　
 
 <style scoped lang="scss">
-.uni-swiper-tab {
-  height: 100rpx;
-  background: #f0f1f3;
+.uni-tab-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  .return-box {
+    position: absolute;
+    top: 0;
+    z-index: 10;
+    width: 110rpx;
+    height: 100%;
+    .icon-fanhui {
+      font-size: 36rpx;
+    }
+  }
+  .uni-swiper-tab {
+    height: 100rpx;
+    background: #f0f1f3;
+  }
+  .active {
+    color: #000000;
+  }
 }
+
 .swiper-tab-list {
   display: flex;
   align-items: center;
@@ -55,9 +78,6 @@ function tabtap(index) {
   margin: 0 30rpx;
   text-align: center;
   color: #6f7072;
-}
-.uni-tab-bar .active {
-  color: #000000;
 }
 .active .swiper-tab-line {
   position: absolute;

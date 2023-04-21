@@ -9,7 +9,7 @@
         <view class="iconfont icon-ziyuanldpi"></view>
         {{ payItem.num }}
       </view>
-      <view class="payItem-time">今天 11:20</view>
+      <view class="payItem-time">今天 {{ payItem.time }}</view>
     </view>
   </view>
 </template>

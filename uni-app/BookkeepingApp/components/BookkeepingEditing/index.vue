@@ -33,7 +33,9 @@
           @click="inputNumFun(item)"
           >{{ item }}</view
         >
-        <view class="numKeyboard-item item-cha"><view class="iconfont icon-chahao"></view></view>
+        <view class="numKeyboard-item item-cha" @click="deleteNum"
+          ><view class="iconfont icon-chahao"></view
+        ></view>
         <view class="numKeyboard-item item-determine" @click="determineFun">确定</view>
       </view>
     </view>
@@ -44,9 +46,10 @@
 import { ref, reactive } from "vue";
 import { useTypeStore } from "@/stores/type";
 import { returnFloat } from "@/utils/publicMethods.js";
+import dayjs from "dayjs";
 
 const typeStore = useTypeStore();
-let amount = ref(0); // 金额
+let amount = ref("0"); // 金额
 let typeIndex = ref(0); // 选中type的index
 let numKeyboardList = reactive([1, 2, 3, 4, 5, 6, 7, 8, 9, "清零", 0, "."]);
 let typeSelected = reactive({});
@@ -59,21 +62,36 @@ function changeType(item, index) {
 // 输入数字
 function inputNumFun(item) {
   if (item == "清零") {
-    amount.value = 0;
+    amount.value = "0";
   } else {
     if (amount.value.length > 9) return;
-    if (amount.value == 0) amount.value = "";
+    if (amount.value == "0") amount.value = "";
+    if (item == ".") {
+      if (amount.value.length == 0) {
+        amount.value = "0";
+        return;
+      }
+      if (amount.value.split(".").length - 1 >= 1) return;
+    }
+
     amount.value += item;
   }
 }
 
+// 删除数字
+function deleteNum() {
+  amount.value = amount.value.slice(0, -1);
+  if (amount.value.length == 0) amount.value = "0";
+}
+
 // 确定按钮
 function determineFun() {
-  if (amount.value == 0) return;
+  if (amount.value == "0") return;
   typeSelected.type = typeStore.typeList[typeIndex.value];
   typeSelected.num = returnFloat(amount.value);
+  typeSelected.time = dayjs().format("HH:mm");
   typeStore.addConsume(typeSelected);
-  amount.value = 0;
+  amount.value = "0";
   typeIndex.value = 0;
 
   uni.navigateTo({

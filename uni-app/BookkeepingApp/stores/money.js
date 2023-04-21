@@ -17,7 +17,7 @@ export const useMoneyStore = defineStore("money", {
       typeStore.consumeList.forEach((item) => {
         num += +item.num;
       });
-      return num;
+      return returnFloat(num);
     },
   },
   actions: {

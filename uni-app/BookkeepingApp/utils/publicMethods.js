@@ -13,3 +13,8 @@ export function returnFloat(value) {
     return value;
   }
 }
+
+// 千分位分割
+export function segmentationNum(str) {
+  return str.replace(/(\d)(?=(?:\d{3})+$)/g, "$1,");
+}
